@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/python3
 
 """
 This is the assembler for the JCS16 written in Python.
