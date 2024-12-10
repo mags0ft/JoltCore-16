@@ -16,5 +16,6 @@ main:                       ; main should be moved to the top by the assembler
     ldi r0 #4               ; load number 4 into register 0
     ldi rb #6               ; load number 6 into register b (register 1)
 
-    jmp jumptest            ; go to our jumptest code block
+    add r0 r1 #0            ; do nothing to test optimization
 
+    jmp jumptest            ; go to our jumptest code block

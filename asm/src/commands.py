@@ -195,6 +195,9 @@ class Jump(JumpInstruction):
     def right_num_of_args(self, num: int):
         return num == 1  # one address
 
+    def generate_binary(self, optimize: bool = False, debug_info: bool = False):
+        return f"{self.opcode} 000 {self.arguments[0].value:016b}"
+
 
 class JumpIfZero(JumpInstruction):
     legible_name: str = (
