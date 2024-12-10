@@ -39,7 +39,6 @@ an internal assembler error)"
             rom_addr_shift += (
                 1  # our instructions will now all be up by one address in ROM!
             )
-            print(rom_addr_shift)
 
     if debug_info:
         codegen_debug_info(

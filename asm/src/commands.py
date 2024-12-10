@@ -100,8 +100,18 @@ class Add(ALUInstruction):
     opcode: str = "00000"
 
     def is_omitable(self) -> bool:
-        # addition with a #0 will always result in the same value as before
-        return any([(arg.type_ != 0 and arg.value == 0) for arg in self.arguments[1:]])
+        # addition with a #0 will always result in the same value as before.
+        # If we do now write this same value into the same register as it is also
+        # coming from, we essentially do nothing. Therefore, we can omit the command.
+
+        target_reg = self.arguments[0]
+        source_reg = (
+            self.arguments[1] if self.arguments[1].type_ == 0 else self.arguments[2]
+        )
+
+        return target_reg.value == source_reg.value and any(
+            [(arg.type_ != 0 and arg.value == 0) for arg in self.arguments[1:]]
+        )
 
 
 class Subtract(ALUInstruction):
@@ -110,8 +120,19 @@ class Subtract(ALUInstruction):
 
     def is_omitable(self) -> bool:
         # subtracting by zero doesn't do anything
-        last_arg = self.arguments[-1]
-        return last_arg.type_ != 0 and last_arg.value == 0
+        target_reg = self.arguments[0]
+        source_reg = self.arguments[1]
+        last_arg = self.arguments[2]
+
+        # we have to be careful here - we can only omit this command
+        # if it would write into the same register as before and result
+        # in the same value.
+        return (
+            last_arg.type_ != 0
+            and last_arg.value == 0
+            and source_reg.type_ == 0
+            and target_reg.value == source_reg.value
+        )
 
 
 class BitwiseAnd(ALUInstruction):
@@ -153,8 +174,18 @@ class ShiftInstruction(ALUInstruction):
 
     def is_omitable(self) -> bool:
         # shifting by zero doesn't do anything
-        last_arg = self.arguments[-1]
-        return last_arg.type_ != 0 and last_arg.value == 0
+        target_reg = self.arguments[0]
+        source_reg = self.arguments[1]
+        last_arg = self.arguments[2]
+
+        # we can only omit if we are writing into the same register as
+        # we are reading from and shifting by no more than exactly 0 bits
+        return (
+            last_arg.type_ != 0
+            and last_arg.value == 0
+            and source_reg.type_ == 0
+            and target_reg.value == source_reg.value
+        )
 
 
 class LeftShift(ShiftInstruction):
