@@ -1,0 +1,310 @@
+from spec import MAX_INT
+from error_handling import codegen_error, optimize_debug_info
+
+
+class Argument:
+    # 0 = register, 1 = immediate for arg 0, 2 = immediate for arg 1
+    type_: int = 0
+    value: int = 0
+
+    def __init__(self, type_, value):
+        self.type_ = type_
+        self.value = value
+
+    def generate_binary(self):
+        return ("{0:03b}".format(self.value)) if self.type_ == 0 else "000"
+
+    def get_immediate(self):
+        return f"{(0 if self.type_ == 0 else self.value):016b}"
+
+    def get_immediate_flag(self):
+        return f"{self.value:02b}"
+
+
+class Instruction:
+    # information for raised errors
+    debug_line: int = -1
+    legible_name: str = "instruction"
+
+    def right_num_of_args(self, num: int) -> bool:
+        return num == 0
+
+    # information for compilation
+    opcode: str = "00000"
+    arguments: "list[Argument]" = []
+
+    def raise_error(self, description):
+        codegen_error(
+            description,
+            {
+                "line": (
+                    str(self.debug_line + 1) if self.debug_line != -1 else "unknown"
+                ),
+                "instruction": self.legible_name,
+            },
+        )
+
+    def is_omitable(self) -> bool:
+        # function to return true if the instruction does not perform anything
+        # (this may be the case with an addition with #0, for example)
+        return False
+
+    def generate_binary(self, optimize: bool = False, debug_info: bool = False):
+        # returns the generated binary as a string
+        if optimize and self.is_omitable():
+            if debug_info:
+                optimize_debug_info(
+                    f"instruction on line {self.debug_line + 1} omitted (it doesn't do anything)"
+                )
+            return ""
+
+        if not self.right_num_of_args(len(self.arguments)):
+            self.raise_error(
+                f"command has wrong amount of arguments, got {len(self.arguments)}"
+            )
+
+        determined_immediate_flag: str = "00"
+        determined_immediate: str = ""
+
+        compiled_args: str = ""
+        for idx, arg in enumerate(self.arguments):
+            if arg.type_ != 0:
+                if idx == 0:
+                    self.raise_error("output register cannot be an immediate")
+                if determined_immediate_flag != "00" or determined_immediate:
+                    self.raise_error(
+                        "cannot use two immediates inside of one instruction"
+                    )
+
+                # Oh! We have an immediate right here.
+                determined_immediate_flag = arg.get_immediate_flag()
+                determined_immediate = arg.get_immediate()
+
+            compiled_args += arg.generate_binary() + " "
+
+        return (
+            f"{self.opcode} {' '.join([i.generate_binary() for i in self.arguments])} {determined_immediate_flag} {determined_immediate}"
+        ).strip()
+
+
+class ALUInstruction(Instruction):
+    legible_name: str = "ALU (Arithmetic/Logic Unit) instruction"
+    opcode: str = "00000"
+
+    def right_num_of_args(self, num: int):
+        return num == 3  # one output, two operands
+
+
+class Add(ALUInstruction):
+    legible_name: str = "Integer addition"
+    opcode: str = "00000"
+
+    def is_omitable(self) -> bool:
+        # addition with a #0 will always result in the same value as before
+        return any([(arg.type_ != 0 and arg.value == 0) for arg in self.arguments[1:]])
+
+
+class Subtract(ALUInstruction):
+    legible_name: str = "Integer subtraction"
+    opcode: str = "00001"
+
+    def is_omitable(self) -> bool:
+        # subtracting by zero doesn't do anything
+        last_arg = self.arguments[-1]
+        return last_arg.type_ != 0 and last_arg.value == 0
+
+
+class BitwiseAnd(ALUInstruction):
+    legible_name: str = "Bitwise-AND"
+    opcode: str = "00010"
+
+
+class BitwiseNot(ALUInstruction):
+    legible_name: str = "Bitwise-NOT"
+    opcode: str = "00011"
+
+    def right_num_of_args(self, num: int):
+        return num == 2  # one output, one operand
+
+
+class BitwiseOr(ALUInstruction):
+    legible_name: str = "Bitwise-OR"
+    opcode: str = "00100"
+
+
+class BitwiseXor(ALUInstruction):
+    legible_name: str = "Bitwise-XOR"
+    opcode: str = "00101"
+
+
+class BitwiseNand(ALUInstruction):
+    legible_name: str = "Bitwise-NAND"
+    opcode: str = "00110"
+
+
+class BitwiseNor(ALUInstruction):
+    legible_name: str = "Bitwise-NOR"
+    opcode: str = "00111"
+
+
+class ShiftInstruction(ALUInstruction):
+    legible_name: str = "Shift operation"
+    opcode: str = "01000"
+
+    def is_omitable(self) -> bool:
+        # shifting by zero doesn't do anything
+        last_arg = self.arguments[-1]
+        return last_arg.type_ != 0 and last_arg.value == 0
+
+
+class LeftShift(ShiftInstruction):
+    legible_name: str = "Binary left-shift"
+
+
+class RightShift(ShiftInstruction):
+    legible_name: str = "Binary right-shift"
+    opcode: str = "01001"
+
+
+class GreaterThan(ALUInstruction):
+    legible_name: str = "Greater than-comparison"
+    opcode: str = "01010"
+
+
+class LessThan(ALUInstruction):
+    legible_name: str = "Less than-comparison"
+    opcode: str = "01011"
+
+
+class IsEquals(ALUInstruction):
+    legible_name: str = "Equals-comparison"
+    opcode: str = "01100"
+
+
+class JumpInstruction(Instruction):
+    legible_name: str = "Jump-like instruction"
+    opcode: str = "10000"
+
+    def right_num_of_args(self, num: int):
+        return num == 2  # one NULL, one address
+
+
+class Jump(JumpInstruction):
+    legible_name: str = "Jump instruction"
+
+    def right_num_of_args(self, num: int):
+        return num == 1  # one address
+
+
+class JumpIfZero(JumpInstruction):
+    legible_name: str = (
+        "Conditional jump only if the last ALU operation resulted in zero"
+    )
+    opcode: str = "10001"
+
+
+class JumpIfNotZero(JumpInstruction):
+    legible_name: str = (
+        "Conditional jump only if the last ALU operation did not result in zero"
+    )
+    opcode: str = "10010"
+
+
+class JumpIfCarry(JumpInstruction):
+    legible_name: str = "Conditional jump only if the last ALU operation had a carry"
+    opcode: str = "10011"
+
+
+class JumpIfNoCarry(JumpInstruction):
+    legible_name: str = (
+        "Conditional jump only if the last ALU operation did not have a carry"
+    )
+    opcode: str = "10100"
+
+
+class OutputClockSignal(Instruction):
+    legible_name: str = "Emit a signal to CLK"
+    opcode: str = "10111"
+
+
+class LDI(Instruction):
+    legible_name: str = "Load an immediate"
+    opcode: str = "11000"
+
+    def right_num_of_args(self, num: int):
+        return num == 2  # target register, one immediate
+
+    def generate_binary(self, optimize: bool = False, debug_info: bool = False):
+        if (not self.right_num_of_args(len(self.arguments))) or (
+            self.arguments[1].type_ != 1
+        ):
+            self.raise_error(
+                "the LDI command only expects exactly one immediate",
+            )
+        return f"{self.opcode} 000 {self.arguments[1].value:016b}"
+
+
+class LoadFromRAM(Instruction):
+    legible_name: str = "Load a value from RAM into a register"
+    opcode: str = "11001"
+
+    def right_num_of_args(self, num: int):
+        return num == 2  # target register, one address
+
+
+class StoreInRAM(Instruction):
+    legible_name: str = "Write from register into RAM"
+    opcode: str = "11010"
+
+    def right_num_of_args(self, num: int):
+        return num == 2  # source register, one address
+
+
+class ReadFromPin(Instruction):
+    legible_name: str = "Read from pin"
+    opcode: str = "11011"
+
+    def right_num_of_args(self, num: int):
+        return num == 2  # target register, one immediate
+
+
+class WriteToPin(Instruction):
+    legible_name: str = "Write to pin"
+    opcode: str = "11100"
+
+    def right_num_of_args(self, num: int):
+        return num == 2  # source register, one immediate
+
+
+class Halt(Instruction):
+    legible_name: str = "Terminate the program"
+    opcode: str = "11111"
+
+
+COMMANDS = {
+    "add": Add,
+    "sub": Subtract,
+    "and": BitwiseAnd,
+    "not": BitwiseNot,
+    "or": BitwiseOr,
+    "xor": BitwiseXor,
+    "nand": BitwiseNand,
+    "nor": BitwiseNor,
+    "lshift": LeftShift,
+    "rshift": RightShift,
+    "gt": GreaterThan,
+    "lt": LessThan,
+    "eq": IsEquals,
+    "jmp": Jump,
+    "jiz": JumpIfZero,
+    "jnz": JumpIfNotZero,
+    "jic": JumpIfCarry,
+    "jnc": JumpIfNoCarry,
+    "oclk": OutputClockSignal,
+    "ldi": LDI,
+    "ldram": LoadFromRAM,
+    "stram": StoreInRAM,
+    "rdpin": ReadFromPin,
+    "wrpin": WriteToPin,
+    "halt": Halt,
+}
