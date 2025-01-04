@@ -1,5 +1,5 @@
 Proposals by Mr. Furber:
-    [ ] extend assembly language using syntax to differentiate between registers and immediates, like:
+    [X] extend assembly language using syntax to differentiate between registers and immediates, like:
         "add r0 r1 #3   ; adds register 1 and number 3 together and writes back to register 0"
     [ ] implement basic parallelization
     [ ] add support for inline immediates

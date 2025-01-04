@@ -1,4 +1,4 @@
-from spec import MAX_INT
+from spec import INLINE_IMMEDIATE_BIT_COUNT, MAX_INT
 from error_handling import codegen_error, optimize_debug_info
 
 
@@ -15,10 +15,10 @@ class Argument:
         return ("{0:03b}".format(self.value)) if self.type_ == 0 else "000"
 
     def get_immediate(self):
-        return f"{(0 if self.type_ == 0 else self.value):016b}"
+        return f"{(0 if self.type_ == 0 else self.value):08b}"
 
     def get_immediate_flag(self):
-        return f"{self.value:02b}"
+        return f"{self.type_:02b}"
 
 
 class Instruction:

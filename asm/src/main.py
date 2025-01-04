@@ -1,7 +1,10 @@
-from error_handling import debug_info, optimize_debug_info
-from bin_generator import generate_binary_from_parsed, write
+#!/usr/bin/python3
+
+from error_handling import debug_info, optimize_debug_info, error
+from bin_generator import generate_build_from_parsed, write
 from parser import build_instructions
 from commands import Instruction
+from spec import OUTPUT_EXTENSIONS
 
 from argparse import ArgumentParser
 
@@ -20,15 +23,39 @@ p.add_argument(
     help="Whether to turn on basic optimizations.",
 )
 p.add_argument(
+    "-f",
+    "--format",
+    help="Which format(s) to use when exporting (possible: b, B, r, x)",
+    default="brx",
+)
+p.add_argument(
     "-d",
     "--debug",
     action="store_true",
     help="Whether to generate debug information while compiling.",
 )
+p.add_argument(
+    "--noext",
+    action="store_true",
+    help="Whether to leave out the format-specific extension (only works when building for one format)",
+)
 
 
 def main():
     args = p.parse_args()
+
+    for char in args.format:
+        if char not in OUTPUT_EXTENSIONS:
+            error("jcasm", f'unknown output format "{char}"')
+
+    if len(args.format) > len(OUTPUT_EXTENSIONS) or len(args.format) == 0:
+        error("jcasm", "invalid number of requested output formats")
+
+    if args.noext and len(args.format) != 1:
+        error(
+            "jcasm",
+            "--format needs to specify exactly one output format when using --noext.",
+        )
 
     if args.debug:
         debug_info("Debug", "enabled debug output")
@@ -41,7 +68,11 @@ def main():
     parsed: "list[Instruction]" = build_instructions(
         input_file, args.optimize, args.debug
     )
-    write(generate_binary_from_parsed(parsed, args.optimize, args.debug), output_file)
+
+    for build, extension, binary in generate_build_from_parsed(
+        parsed, args.format, args.optimize, args.debug
+    ):
+        write(build, output_file + (f".{extension}" if not args.noext else ""), binary)
 
 
 if __name__ == "__main__":

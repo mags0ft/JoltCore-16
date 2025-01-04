@@ -2,7 +2,7 @@ from dataclasses import dataclass
 import os
 from string import ascii_lowercase
 
-from spec import REGISTERS_AVAILABLE
+from spec import INLINE_IMMEDIATE_BIT_COUNT, MAX_INLINE_IMMEDIATE, REGISTERS_AVAILABLE
 from commands import COMMANDS, Argument, Instruction
 from error_handling import parse_error
 
@@ -156,7 +156,14 @@ def parse_line(l: LineOfCode, block_names: "dict[str, int]") -> Instruction:
 
             elif arg.startswith("#"):
                 # immediate argument!
-                args_res.append(Argument(idx, int(arg[1:])))
+                immediate_value = int(arg[1:])
+                if immediate_value > MAX_INLINE_IMMEDIATE:
+                    parse_error(
+                        f"inline immediates are limited to {INLINE_IMMEDIATE_BIT_COUNT} bits, so they cannot exceed {MAX_INLINE_IMMEDIATE}.",
+                        {"line": l.original_line},
+                    )
+
+                args_res.append(Argument(idx, immediate_value))
 
             elif arg in block_names:
                 # jump to named code block is the same as a static address in ROM
