@@ -46,9 +46,11 @@ def preprocess(s: str) -> "list[LineOfCode]":
             continue
 
         comment_pos = line.find(";")
-        processed_line = line[
-            : (comment_pos if comment_pos != -1 else len(line))
-        ].strip()
+        processed_line = (
+            line[: (comment_pos if comment_pos != -1 else len(line))]
+            .strip()
+            .replace(",", " ")
+        )
 
         if (not processed_line.endswith(":")) and (not cur_in):
             parse_error("code outside of named block", {"line": line_number + 1})
@@ -125,8 +127,68 @@ def parse_line(l: LineOfCode, block_names: "dict[str, int]") -> Instruction:
         args = split_content[1:]
         args_res: "list[Argument]" = []
 
+        in_encapsulated_op: bool = False
+        cur_encapsulated_op: str = ""
+
         for idx, arg in enumerate(args):
             actual_part: str = arg[1:]
+
+            if in_encapsulated_op and arg.startswith("("):
+                parse_error(
+                    "you cannot have an encapsulated operation within another encapsulated operation",
+                    {"line": l.original_line, "argument": arg},
+                )
+            elif not in_encapsulated_op and arg.endswith(")"):
+                parse_error(
+                    "there is no open encapsulated operation within this instruction - thus, none can be closed",
+                    {"line": l.original_line, "argument": arg},
+                )
+
+            if arg.startswith("("):
+                if cur_encapsulated_op != "":
+                    parse_error(
+                        "you can only have up to one encapsulated operation per ALU instruction",
+                        {"line": l.original_line, "argument": arg},
+                    )
+
+                in_encapsulated_op = True
+                cur_encapsulated_op += actual_part + " "
+                continue
+
+            if arg.endswith(")"):
+                in_encapsulated_op = False
+                cur_encapsulated_op += arg[:-1]
+
+                split_op = cur_encapsulated_op.split()
+                if not split_op[1].startswith("r"):
+                    parse_error(
+                        "in encapsulated operations, the first operand MUST be a register",
+                        {"line": l.original_line, "argument": arg},
+                    )
+
+                cur_encapsulated_op = f"{split_op[0]} {str(split_op[1] + ' ') * 2} {' '.join(split_op[2:])}"
+
+                generated_arg: Argument = Argument(
+                    0,
+                    -1,
+                    parse_line(
+                        LineOfCode(
+                            cur_encapsulated_op,
+                            l.original_line,
+                            l.part_of,
+                            l.rom_addr,
+                        ),
+                        block_names,
+                    ),
+                )
+
+                args_res.append(generated_arg)
+                continue
+
+            if in_encapsulated_op:
+                cur_encapsulated_op += arg + " "
+                continue
+
             if arg.startswith("r") or arg.startswith("$"):
                 # register or static address argument!
                 reg_to_use: int = -1

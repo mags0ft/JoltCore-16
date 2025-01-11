@@ -1,24 +1,54 @@
+from typing import Union
 from spec import INLINE_IMMEDIATE_BIT_COUNT, MAX_INT
 from error_handling import codegen_error, optimize_debug_info
 
 
 class Argument:
-    # 0 = register, 1 = immediate for arg 0, 2 = immediate for arg 1
+    # 0 = register or encapsulated operation, 1 = immediate for arg 0, 2 = immediate for arg 1
     type_: int = 0
+    # value is either the register to target or the immediate itself
     value: int = 0
 
-    def __init__(self, type_, value):
+    encapsulated_operation: "Union[ALUInstruction, None]" = None
+
+    def __init__(self, type_, value, encapsulated_operation=None):
         self.type_ = type_
         self.value = value
+        self.encapsulated_operation = encapsulated_operation
 
     def generate_binary(self):
-        return ("{0:03b}".format(self.value)) if self.type_ == 0 else "000"
+        return (
+            ("{0:03b}".format(self.value))
+            if (self.type_ == 0 and self.encapsulated_operation == None)
+            else "000"
+        )
 
     def get_immediate(self):
         return f"{(0 if self.type_ == 0 else self.value):08b}"
 
     def get_immediate_flag(self):
-        return f"{self.type_:02b}"
+        # type + 1, because the flags mean this:
+        # 00 = encapsulated operation applied to operand A
+        # 01 = encapsulated operation applied to operand B
+        # 10 = inline immediate parameter instead of operand A
+        # 11 = inline immediate parameter instead of operand B
+
+        return f"{self.type_+1:02b}"
+
+    def get_encapsulated_operation_binary(self):
+        if self.encapsulated_operation == None:
+            return f"{NOP.opcode[1:]} 000 0"
+
+        if isinstance(self.encapsulated_operation, BitwiseNot):
+            # edge case: NOT only has one operand, the register, and nothing else
+            return f"{self.encapsulated_operation.opcode[1:]} 000 0"
+
+        # arguments[1] is the register B of the encapsulated operation, register A is the register the encapsulated operation is being applied to
+        return f"{self.encapsulated_operation.opcode[1:]} {self.encapsulated_operation.arguments[2].value:03b} {'1' if self.encapsulated_operation.arguments[2].type_ != 0 else '0'}"
+
+    def __str__(self):
+        return f"<Argument ({'register' if self.type_ == 0 else 'immediate for operand ' + 'AB'[self.type_-1]}) \
+\"{self.encapsulated_operation.legible_name + ' ' + (','.join([str(i) for i in self.encapsulated_operation.arguments])) if self.encapsulated_operation != None else self.value}\">"
 
 
 class Instruction:
@@ -69,9 +99,13 @@ class Instruction:
         compiled_args: str = ""
         for idx, arg in enumerate(self.arguments):
             if arg.type_ != 0:
-                if idx == 0:
+                if arg.encapsulated_operation != None:
+                    self.raise_error(
+                        "cannot have immediate and encapsulated operation at the same time"
+                    )
+                elif idx == 0:
                     self.raise_error("output register cannot be an immediate")
-                if determined_immediate_flag != "00" or determined_immediate:
+                elif determined_immediate_flag != "00" or determined_immediate:
                     self.raise_error(
                         "cannot use two immediates inside of one instruction"
                     )
@@ -79,6 +113,8 @@ class Instruction:
                 # Oh! We have an immediate right here.
                 determined_immediate_flag = arg.get_immediate_flag()
                 determined_immediate = arg.get_immediate()
+            elif arg.encapsulated_operation != None:
+                determined_immediate_flag = f"{idx - 1:02b}"
 
             compiled_args += arg.generate_binary() + " "
 
@@ -210,6 +246,11 @@ class LessThan(ALUInstruction):
 class IsEquals(ALUInstruction):
     legible_name: str = "Equals-comparison"
     opcode: str = "01100"
+
+
+class NOP(ALUInstruction):
+    legible_name: str = "No operation"
+    opcode: str = "01111"
 
 
 class JumpInstruction(Instruction):
