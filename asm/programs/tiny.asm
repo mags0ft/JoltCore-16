@@ -2,8 +2,12 @@
 ; (namely shorter inline immediates and encapsulated operations)
 
 main:
-    add r2, r2, #5                 ; starting off with a standard addition...
-    add r2, #5, r2                 ; another one to make sure we didn't break immediates
+    add r1, r3, r0                 ; the most "plain" add command we can think of
+    ; this should generate binary with a "shadow" encapsulated NOP operation, so
+    ; we technically don't actually alter the value before using it
+
+    add r2, r2, #5                 ; now, a standard addition with inline immediate...
+    add r2, #5, r2                 ; another form, to make sure we didn't break immediates
 
     add r0, r0, (lshift r0, #2)    ; an add instruction with encapsulated operation
     add r1, (rshift r1, #4), r1    ; another one, just to make sure everything works

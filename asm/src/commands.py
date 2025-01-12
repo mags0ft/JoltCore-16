@@ -42,12 +42,31 @@ class Argument:
             # edge case: NOT only has one operand, the register, and nothing else
             return f"{self.encapsulated_operation.opcode[1:]} 000 0"
 
-        # arguments[1] is the register B of the encapsulated operation, register A is the register the encapsulated operation is being applied to
-        return f"{self.encapsulated_operation.opcode[1:]} {self.encapsulated_operation.arguments[2].value:03b} {'1' if self.encapsulated_operation.arguments[2].type_ != 0 else '0'}"
+        # arguments[1] is the register B of the encapsulated operation, register A is the register
+        # the encapsulated operation is being applied to
+        return (
+            f"{self.encapsulated_operation.opcode[1:]} "
+            + f"{self.encapsulated_operation.arguments[2].value:03b} "
+            + f"{'1' if self.encapsulated_operation.arguments[2].type_ != 0 else '0'}"
+        )
 
     def __str__(self):
-        return f"<Argument ({'register' if self.type_ == 0 else 'immediate for operand ' + 'AB'[self.type_-1]}) \
-\"{self.encapsulated_operation.legible_name + ' ' + (','.join([str(i) for i in self.encapsulated_operation.arguments])) if self.encapsulated_operation != None else self.value}\">"
+        type_description: str = (
+            "register"
+            if self.type_ == 0
+            else "immediate for operand " + "AB"[self.type_ - 1]
+        )
+        value_description: str = ""
+        if self.encapsulated_operation == None:
+            value_description = str(self.value)
+        else:
+            value_description = (
+                self.encapsulated_operation.legible_name
+                + " "
+                + (",".join([str(i) for i in self.encapsulated_operation.arguments]))
+            )
+
+        return f'<Argument ({type_description}) "{value_description}">'
 
 
 class Instruction:
@@ -92,9 +111,9 @@ class Instruction:
                 f"command has wrong amount of arguments, got {len(self.arguments)}"
             )
 
-        determined_immediate_flag: str = "00"
+        determined_flag: str = "00"
         determined_immediate: str = ""
-        determiend_encapsulated_operation: str = ""
+        determined_encapsulated_operation: str = ""
 
         compiled_args: str = ""
         for idx, arg in enumerate(self.arguments):
@@ -105,24 +124,46 @@ class Instruction:
                     )
                 elif idx == 0:
                     self.raise_error("output register cannot be an immediate")
-                elif determined_immediate_flag != "00" or determined_immediate:
+                elif determined_flag != "00" or determined_immediate:
                     self.raise_error(
                         "cannot use two immediates inside of one instruction"
                     )
 
                 # Oh! We have an immediate right here.
-                determined_immediate_flag = arg.get_immediate_flag()
+                determined_flag = arg.get_immediate_flag()
                 determined_immediate = arg.get_immediate()
             elif arg.encapsulated_operation != None:
-                determined_immediate_flag = f"{idx - 1:02b}"
-                determiend_encapsulated_operation = (
+                determined_flag = f"{idx - 1:02b}"
+                determined_encapsulated_operation = (
                     arg.get_encapsulated_operation_binary()
                 )
 
             compiled_args += arg.generate_binary() + " "
 
+        if isinstance(self, ALUInstruction):
+            if (
+                determined_flag == "00"
+                and (not determined_immediate)
+                and (not determined_encapsulated_operation)
+            ):
+                # Okay - we seem to have a very plain instruction here; one that doesn't
+                # make use of inline immediates and also doesn't work with any encapsulated
+                # operations. Thus, we need to creaty a "dummy" encapsulated operation that
+                # simply doesn't do anything with our input values so that our CPU can work
+                # with the instruction.
+
+                determined_encapsulated_operation = f"{NOP.opcode[1:]} 000 0"
+        else:
+            determined_flag = ""
+            determined_encapsulated_operation = ""
+            determined_immediate = ""
+
         return (
-            f"{self.opcode} {' '.join([i.generate_binary() for i in self.arguments])} {determined_immediate_flag} {determined_immediate if determined_immediate_flag.startswith('1') else determiend_encapsulated_operation}"
+            f"{self.opcode} {' '.join([i.generate_binary() for i in self.arguments])} "
+            + f"{determined_flag} "
+            + determined_immediate
+            if determined_flag.startswith("1")
+            else determined_encapsulated_operation
         ).strip()
 
 
