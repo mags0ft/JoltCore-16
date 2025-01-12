@@ -17,11 +17,10 @@ class Argument:
         self.encapsulated_operation = encapsulated_operation
 
     def generate_binary(self):
-        return (
-            ("{0:03b}".format(self.value))
-            if (self.type_ == 0 and self.encapsulated_operation == None)
-            else "000"
-        )
+        if self.encapsulated_operation != None:
+            return f"{self.encapsulated_operation.arguments[0].value:03b}"
+
+        return ("{0:03b}".format(self.value)) if self.type_ == 0 else "000"
 
     def get_immediate(self):
         return f"{(0 if self.type_ == 0 else self.value):08b}"
@@ -95,6 +94,7 @@ class Instruction:
 
         determined_immediate_flag: str = "00"
         determined_immediate: str = ""
+        determiend_encapsulated_operation: str = ""
 
         compiled_args: str = ""
         for idx, arg in enumerate(self.arguments):
@@ -115,11 +115,14 @@ class Instruction:
                 determined_immediate = arg.get_immediate()
             elif arg.encapsulated_operation != None:
                 determined_immediate_flag = f"{idx - 1:02b}"
+                determiend_encapsulated_operation = (
+                    arg.get_encapsulated_operation_binary()
+                )
 
             compiled_args += arg.generate_binary() + " "
 
         return (
-            f"{self.opcode} {' '.join([i.generate_binary() for i in self.arguments])} {determined_immediate_flag} {determined_immediate}"
+            f"{self.opcode} {' '.join([i.generate_binary() for i in self.arguments])} {determined_immediate_flag} {determined_immediate if determined_immediate_flag.startswith('1') else determiend_encapsulated_operation}"
         ).strip()
 
 
