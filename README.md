@@ -1,4 +1,4 @@
-![An imagination of the CPU rendered in Blender](./Documentation/images/promo-picture.png)
+![An imagination of the CPU rendered in Blender](./docs/images/promo-picture.png)
 
 # JoltCore Spark 16 (JCS16)
 
@@ -6,6 +6,10 @@ This is a fun little project I did in 2 weeks on vacation. It is an
 extension of my 8-bit CPU with 8 general purpose 16 bit registers,
 I/O ports, up to 64K RAM and ROM, basic maths and logical
 instructions, a tiny assembler and more.
+
+**In the wintertime of 2024 and 2025, it was improved further** by
+adding some optimizations in the context of a school project mentored
+by Steve Furber, co-developer of the original ARM architecture.
 
 > [!IMPORTANT]  
 > The entire CPU is a custom design, from bit shifter to I/O system.
