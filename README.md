@@ -2,31 +2,57 @@
 
 # JoltCore Spark 16 (JCS16)
 
-This is a fun little project I did in 2 weeks on vacation. It is an
-extension of my 8-bit CPU with 8 general purpose 16 bit registers,
-I/O ports, up to 64K RAM and ROM, basic maths and logical
-instructions, a tiny assembler and more.
-
-**In the wintertime of 2024 and 2025, it was improved further** by
-adding some optimizations in the context of a school project mentored
-by Steve Furber, co-developer of the original ARM architecture.
+This is a fun little project I did in 2 weeks on vacation, however it has now been expanded with many more hours invested into it. It is an **extension of my 8-bit CPU** with **8 general purpose 16 bit registers**, I/O ports, up to **128K RAM and ROM**, basic maths and logical instructions, a fairly mature assembler and more.
 
 > [!IMPORTANT]  
-> The entire CPU is a custom design, from bit shifter to I/O system.
+> The entire CPU is a custom design, from bit shifter to ISA.
+>
+> **In the winter of 2024 and 2025, it was improved further** by
+> adding some optimizations in the context of a school project mentored
+> by _Steve Furber_, co-developer of the original ARM architecture.
+
+The project also features an **own instruction set architecture**. Key features are:
+
+- support for **8-bit immediates in every ALU instruction**:
+    ```
+    add r0, r1, #3
+    lshift r2, #2, r3
+    ```
+- **encapsulated operations**, so you can calculate two things at once and **apply modifications to your ALU operands**:
+    ```
+    sub r4 (add r2 r3) r1
+    nand r5 r1 (not r0)
+    ```
+- **3-bit immediates** in all of said encapsulated operations:
+    ```
+    nor r1 (sub r7 #5) r6
+    ```
+- fixed instruction length of **24 bits**
+- LDI command to immediately load any arbitrary 16-bit value
+
+The assembler tries to make coding as comfortable as possible:
+
+- performs preprocessing and optimization
+- it uses a custom assembly language that supports...
+    - register notation with either digits (`r0`, `r2`, ...) or letters (`ra`, `rc`, ...)
+    - named jumps and code blocks
+    - pre-processor directives such as `define` statements which allow you to use named registers and constants
+    - comments
+- detailed errors (with line numbers and descriptions) are thrown once problems are detected
+
+You can find the assembler in the respective folder, `asm`. It is written in Python. To use an example program, assemble it and copy the entire content of the `.hex` file, then paste it into the ROM inside of Logisim Evolution. The source for these programs is inside of the `asm/programs` folder.
+
+A command to assemble into all possible output formats, using debug output and optimizations could look like this:
+
+```bash
+$ ./jcasm ./asm/programs/fibonacci.asm -o ./asm/build/fibonacci.out -dO -f bBrx
+```
 
 > [!NOTE]
-> You need Logisim Evolution to use this project.
-> It is an open source logic simulator available here:
+> You need Logisim Evolution to use this project. It is an open source logic simulator available here:
 > https://github.com/logisim-evolution/logisim-evolution
 
-You can find the assembler in the respective folder. It is written in
-Python. You can find built programs in the `examples` folder.
-To use a program, copy the entire content of the `.hex` file and
-paste it into the ROM inside of Logisim Evolution.
-
-
-The source for these programs is inside of the `programs` folder.
 
 ---
 
-**Have fun!**
+**Have fun with it!**
