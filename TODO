@@ -1,5 +1,12 @@
-Proposals by Mr. Furber:
+Proposals by Mr. Furber and ideas I had:
     [X] extend assembly language using syntax to differentiate between registers and immediates, like:
-        "add r0 r1 #3   ; adds register 1 and number 3 together and writes back to register 0"
+        "add r0 r1 #3           ; adds register 1 and number 3 together and writes back to register 0"
+
     [ ] implement basic parallelization
-    [ ] add support for inline immediates
+
+    [X] add support for inline immediates
+    [X] add encapsulated operations, allowing you to calculate two things at once:
+        "sub r2 (xor r0 #6) r1  ; subtracts register 1 from the result of bitwise-xoring register 0 with 0b110"
+
+Things I added on top of this (QoL/comfort features):
+    [X] add preprocessor directives to improve assembly readability
