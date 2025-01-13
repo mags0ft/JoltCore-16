@@ -1,8 +1,14 @@
-![An imagination of the CPU rendered in Blender](./docs/images/promo-picture.png)
+<img 
+    style="display: block; 
+           margin-left: auto;
+           margin-right: auto;
+           width: 75%; border-radius: 16px;"
+    src="./docs/images/promo-picture.png" 
+    alt="An imagination of the CPU rendered in Blender">
 
-# JoltCore Spark 16 (JCS16)
+<h1 style="text-align: center; margin-top: 30px; margin-bottom: 30px;">JoltCore Spark 16 (JCS16)</h1>
 
-This is a fun little project I did in 2 weeks on vacation, however it has now been expanded with many more hours invested into it. It is an **extension of my 8-bit CPU** with **8 general purpose 16 bit registers**, I/O ports, up to **128K RAM and ROM**, basic maths and logical instructions, a fairly mature assembler and more.
+This is a fun little project I did in 2 weeks on vacation, however it has now been expanded with many more hours invested into it. It is an **extension of my original 8-bit CPU** which is now **16 bits**, has **8 general purpose 16 bit registers**, I/O ports, up to **128KiB RAM and ROM**, basic maths and logical instructions, a fairly mature assembler and more.
 
 > [!IMPORTANT]  
 > The entire CPU is a custom design, from bit shifter to ISA.
@@ -39,6 +45,8 @@ The assembler tries to make coding as comfortable as possible:
     - pre-processor directives such as `define` statements which allow you to use named registers and constants
     - comments
 - detailed errors (with line numbers and descriptions) are thrown once problems are detected
+
+![Screenshot of a part of the file fibonacci.asm](./docs/images/asm-file-example-screenshot.png)
 
 You can find the assembler in the respective folder, `asm`. It is written in Python. To use an example program, assemble it and copy the entire content of the `.hex` file, then paste it into the ROM inside of Logisim Evolution. The source for these programs is inside of the `asm/programs` folder.
 
