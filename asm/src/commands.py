@@ -304,39 +304,36 @@ class JumpInstruction(Instruction):
     opcode: str = "10000"
 
     def right_num_of_args(self, num: int):
-        return num == 2  # one NULL, one address
+        return num == 1  # one NULL, one address
 
 
 class Jump(JumpInstruction):
     legible_name: str = "Jump instruction"
 
-    def right_num_of_args(self, num: int):
-        return num == 1  # one address
-
     def generate_binary(self, optimize: bool = False, debug_info: bool = False):
         return f"{self.opcode} 000 {self.arguments[0].value:016b}"
 
 
-class JumpIfZero(JumpInstruction):
+class JumpIfZero(Jump):
     legible_name: str = (
         "Conditional jump only if the last ALU operation resulted in zero"
     )
     opcode: str = "10001"
 
 
-class JumpIfNotZero(JumpInstruction):
+class JumpIfNotZero(Jump):
     legible_name: str = (
         "Conditional jump only if the last ALU operation did not result in zero"
     )
     opcode: str = "10010"
 
 
-class JumpIfCarry(JumpInstruction):
+class JumpIfCarry(Jump):
     legible_name: str = "Conditional jump only if the last ALU operation had a carry"
     opcode: str = "10011"
 
 
-class JumpIfNoCarry(JumpInstruction):
+class JumpIfNoCarry(Jump):
     legible_name: str = (
         "Conditional jump only if the last ALU operation did not have a carry"
     )

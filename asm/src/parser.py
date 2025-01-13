@@ -2,6 +2,7 @@ from dataclasses import dataclass
 import os
 from string import ascii_lowercase
 
+from preprocessor import remove_comment_from_line, run_preprocessing_passes
 from spec import INLINE_IMMEDIATE_BIT_COUNT, MAX_INLINE_IMMEDIATE, REGISTERS_AVAILABLE
 from commands import COMMANDS, Argument, Instruction
 from error_handling import parse_error
@@ -29,6 +30,8 @@ def build_instructions(
     with open(input_file, "r") as f:
         content = f.read()
 
+    content = run_preprocessing_passes(content, debug_info)
+
     return parse_file(content, optimize, debug_info)
 
 
@@ -45,12 +48,7 @@ def preprocess(s: str) -> "list[LineOfCode]":
         if stripped_line.startswith(";") or not stripped_line:
             continue
 
-        comment_pos = line.find(";")
-        processed_line = (
-            line[: (comment_pos if comment_pos != -1 else len(line))]
-            .strip()
-            .replace(",", " ")
-        )
+        processed_line = remove_comment_from_line(line)
 
         if (not processed_line.endswith(":")) and (not cur_in):
             parse_error("code outside of named block", {"line": line_number + 1})

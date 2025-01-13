@@ -30,6 +30,10 @@ def codegen_debug_info(info: str):
     debug_info("Code generation", info)
 
 
+def preprocess_debug_info(info: str):
+    debug_info("Pre-processing", info)
+
+
 def parse_debug_info(info: str):
     debug_info("Parser", info)
 
@@ -40,6 +44,10 @@ def optimize_debug_info(info: str):
 
 def codegen_error(description: str, info: dict = {}):
     error("Code generation failed", description, info)
+
+
+def preprocess_error(description: str, info: dict = {}):
+    error("Pre-processing", description, info)
 
 
 def parse_error(description: str, info: dict = {}):
