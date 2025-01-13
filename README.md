@@ -1,12 +1,10 @@
-<img 
-    style="display: block; 
-           margin-left: auto;
-           margin-right: auto;
-           width: 75%; border-radius: 16px;"
-    src="./docs/images/promo-picture.png" 
-    alt="An imagination of the CPU rendered in Blender">
-
-<h1 style="text-align: center; margin-top: 30px; margin-bottom: 30px;">JoltCore Spark 16 (JCS16)</h1>
+<p align="center">
+    <img 
+        style="width: 75%;"
+        src="./docs/images/promo-picture.png" 
+        alt="An imagination of the CPU rendered in Blender">
+    <h1 align="center">JoltCore Spark 16 (JCS16)</h1>
+</p>
 
 This is a fun little project I did in 2 weeks on vacation, however it has now been expanded with many more hours invested into it. It is an **extension of my original 8-bit CPU** which is now **16 bits**, has **8 general purpose 16 bit registers**, I/O ports, up to **128KiB RAM and ROM**, basic maths and logical instructions, a fairly mature assembler and more.
 
