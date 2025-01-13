@@ -12,8 +12,8 @@ define numbers_calculated_reg { r3 }    ; register keeping track of the progress
 
 init:
     ldi cur_fib_num_reg! #0
-    ldi prev_num_1_reg! #0
-    ldi prev_num_2_reg! #0
+    ldi prev_num_1_reg! #2
+    ldi prev_num_2_reg! #1
     ldi numbers_calculated_reg! #0
 
     jmp calc_next_fibonacci_number
