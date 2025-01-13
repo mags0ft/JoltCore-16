@@ -3,7 +3,7 @@
 
 main:
     add r1, r3, r0                 ; the most "plain" add command we can think of
-    ; this should generate binary with a "shadow" encapsulated NOP operation, so
+    ; this should generate binary with a "dummy" encapsulated NOP operation, so
     ; we technically don't actually alter the value before using it
 
     add r2, r2, #5                 ; now, a standard addition with inline immediate...

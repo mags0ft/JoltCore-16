@@ -161,9 +161,11 @@ class Instruction:
         return (
             f"{self.opcode} {' '.join([i.generate_binary() for i in self.arguments])} "
             + f"{determined_flag} "
-            + determined_immediate
-            if determined_flag.startswith("1")
-            else determined_encapsulated_operation
+            + (
+                determined_immediate
+                if determined_flag.startswith("1")
+                else determined_encapsulated_operation
+            )
         ).strip()
 
 
