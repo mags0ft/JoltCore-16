@@ -28,6 +28,9 @@ calc_next_fibonacci_number:
     ; all preparations are done, calculate the actual fibonacci number now:                                        
     add cur_fib_num_reg!, prev_num_1_reg!, prev_num_2_reg!
 
+    ; increase numbers calulcated by one
+    add numbers_calculated_reg! numbers_calculated_reg! #1
+
     ; now we can continue the cycle
     jmp check_if_done
 
