@@ -1,0 +1,2 @@
+# Encapsulated operations
+
