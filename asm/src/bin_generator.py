@@ -21,12 +21,15 @@ def generate_build_from_parsed(
 
     for el in parsed:
         # if this is a jump instruction, we need to adjust it's target address!
-        if optimize and isinstance(el, JumpInstruction):
-            # optimizations will remove some instructions due to them doing nothing.
-            # this needs to be accounted for in jump instructions, so they're
-            # adjusted accordingly.
+        if isinstance(el, JumpInstruction):
+            el.arguments[0].value -= 1
 
-            el.arguments[0].value -= rom_addr_shift
+            if optimize:
+                # optimizations will remove some instructions due to them doing nothing.
+                # this needs to be accounted for in jump instructions, so they're
+                # adjusted accordingly.
+
+                el.arguments[0].value -= rom_addr_shift
 
         compiled: str = el.generate_binary(optimize, debug_info)
         did_return_something: bool = compiled.strip() != ""
