@@ -1,4 +1,5 @@
 import string
+from uuid import uuid4
 from error_handling import preprocess_debug_info, preprocess_error
 
 
@@ -32,6 +33,7 @@ def run_preprocessing_passes(text: str, debug_info: bool):
 
     line, col = 1, 0
     cur = ""
+    in_comment = False
     definition_phase = 0
     cur_definition_name = ""
     cur_definition_content = ""
@@ -40,11 +42,17 @@ def run_preprocessing_passes(text: str, debug_info: bool):
         if definition_phase in [1, 2]:
             preprocessor_directive_lines.add(line)
 
+        if char == ";":
+            in_comment = True
+
         col += 1
         if char == "\n":
             cur = ""
             line += 1
             col = 1
+            in_comment = False
+        elif in_comment:
+            continue
         elif char == " ":
             cur = ""
         elif char == "{":
@@ -112,15 +120,29 @@ def run_preprocessing_passes(text: str, debug_info: bool):
         preprocess_debug_info(f"{len(definitions)} definition(s) found")
 
     passes = 0
-    while "!" in "\n".join([remove_comment_from_line(i) for i in text.splitlines()]):
+    while "!" in "\n".join(
+        [
+            remove_comment_from_line(i)
+            for i in comment_out_lines(text, preprocessor_directive_lines).splitlines()
+        ]
+    ):
         for key, value in definitions.items():
-            text = text.replace(key, value)
+            while True:
+                uuid: str = str(uuid4()).replace("-", "_")
+
+                altered_value = value.replace("scope!", uuid)
+
+                prev_text: str = text
+                text = text.replace(key, altered_value, 1)
+
+                if prev_text == text:
+                    break
 
         passes += 1
 
         if passes > 1024:
             preprocess_error(
-                "circular reference detected in pre-processing definitions"
+                "circular reference detected in pre-processing definitions or undefined definition"
             )
 
     if debug_info:
