@@ -5723,4 +5723,26 @@ c00000 800002 301 57037f 880002 f80000
       <a name="incoming" val="16"/>
     </comp>
   </circuit>
+  <circuit name="JC16_Parallelism_Detection">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="JC16_Parallelism_Detection"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="128.0"/>
+    <comp lib="0" loc="(1010,800)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="label" val="INSTR_A"/>
+      <a name="width" val="24"/>
+    </comp>
+    <comp lib="0" loc="(1010,870)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="label" val="INSTR_B"/>
+      <a name="width" val="24"/>
+    </comp>
+    <comp lib="0" loc="(1450,800)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="CAN_RUN_PARALLEL"/>
+      <a name="output" val="true"/>
+    </comp>
+  </circuit>
 </project>

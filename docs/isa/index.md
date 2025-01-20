@@ -2,7 +2,7 @@
 
 This section of the documentation contains all the important information about the Instruction Set Architecture (ISA) of the JC16 processor.
 
-> _"ISA designers hate wasting instruction bits!"_
+> _"ISA designers hate wasting \[instruction\] bits!"_
 >
 > Steve Furber to me, 2024
 
@@ -14,4 +14,5 @@ This section of the documentation contains all the important information about t
 - [I/O system](./io.md)
 - [LDI command](./ldi.md)
 - [Memory management instructions](./memory-management.md)
+- [Jump instructions](./jumps.md)
 - [Miscellaneous instructions](./misc.md)
