@@ -4,7 +4,7 @@ There are a few operations that do not fit into the other categories all too wel
 
 ## oclk
 
-Omits a clock signal on the clock pin. This pin is separate from the I/O system pins, which is why the documentation for this command is separate.
+Emits a clock signal on the clock pin. This pin is separate from the I/O system pins, which is why the documentation for this command is separate.
 
 - Mnemonic: `oclk`
 - Arguments:
