@@ -413,6 +413,7 @@ COMMANDS = {
     "gt": GreaterThan,
     "lt": LessThan,
     "eq": IsEquals,
+    "nop": NOP,
     "jmp": Jump,
     "jiz": JumpIfZero,
     "jnz": JumpIfNotZero,
