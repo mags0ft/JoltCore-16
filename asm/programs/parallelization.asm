@@ -32,13 +32,13 @@ standard:
     ; some code that depends on each previous line's result:
     sub r1, r2, #4
     add r2, #2, r1
-    lshift r0, (not r2), #3
+    lshift r0, (not r2), r1
     xor r2, r4, r0
 
     ; and once again, so we can observe it better:
     sub r1, r2, #4
     add r2, #2, r1
-    lshift r0, (not r2), #3
+    lshift r0, (not r2), r1
     xor r3, r4, r0
 
     halt

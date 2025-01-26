@@ -359,7 +359,7 @@ class LDI(Instruction):
             self.raise_error(
                 "the LDI command only expects exactly one immediate",
             )
-        return f"{self.opcode} 000 {self.arguments[1].value:016b}"
+        return f"{self.opcode} {self.arguments[0].value:03b} {self.arguments[1].value:016b}"
 
 
 class LoadFromRAM(Instruction):
