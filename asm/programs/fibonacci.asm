@@ -1,7 +1,7 @@
 ; This program will calculate n Fibonacci numbers.
 
 ; Enter how many numbers you want to generate:
-define FIB_NUMBERS_TO_CALCULATE { #20 }
+define FIB_NUMBERS_TO_CALCULATE { #24 }
 
 ; These are the registers we can use. The new assembler supports a primitive kind
 ; of preprocessor directives, so we can use named registers to make things simpler.
@@ -12,7 +12,7 @@ define numbers_calculated_reg { r3 }    ; register keeping track of the progress
 
 init:
     ldi cur_fib_num_reg!, #0
-    ldi prev_num_1_reg!, #2
+    ldi prev_num_1_reg!, #1
     ldi prev_num_2_reg!, #1
     ldi numbers_calculated_reg!, #0
 

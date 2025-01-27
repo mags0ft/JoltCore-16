@@ -131,8 +131,14 @@
     <comp lib="0" loc="(880,590)" name="Clock">
       <a name="label" val="CLK"/>
     </comp>
+    <comp lib="0" loc="(910,550)" name="Constant">
+      <a name="width" val="16"/>
+    </comp>
     <comp lib="1" loc="(930,610)" name="AND Gate"/>
     <comp lib="3" loc="(640,790)" name="Adder">
+      <a name="width" val="16"/>
+    </comp>
+    <comp lib="3" loc="(950,540)" name="Adder">
       <a name="width" val="16"/>
     </comp>
     <comp lib="4" loc="(1290,770)" name="RAM">
@@ -144,8 +150,7 @@
       <a name="addrWidth" val="16"/>
       <a name="appearance" val="classic"/>
       <a name="contents">addr/data: 16 24
-c00004 c10008 c20005 c30007 24f0 26cf0 100f0 348f0
-24f0 26cf0 100f0 324f0 f80000
+c00000 800002 301 5703ff 880002 f80000
 </a>
       <a name="dataWidth" val="24"/>
     </comp>
@@ -153,10 +158,13 @@ c00004 c10008 c20005 c30007 24f0 26cf0 100f0 348f0
       <a name="addrWidth" val="16"/>
       <a name="appearance" val="classic"/>
       <a name="contents">addr/data: 16 24
-c00004 c10008 c20005 c30007 24f0 26cf0 100f0 348f0
-24f0 26cf0 100f0 324f0 f80000
+c00000 800002 301 5703ff 880002 f80000
 </a>
       <a name="dataWidth" val="24"/>
+    </comp>
+    <comp lib="4" loc="(950,510)" name="Register">
+      <a name="appearance" val="logisim_evolution"/>
+      <a name="width" val="16"/>
     </comp>
     <comp lib="5" loc="(1400,1180)" name="RGB Video">
       <a name="height" val="256"/>
@@ -167,20 +175,22 @@ c00004 c10008 c20005 c30007 24f0 26cf0 100f0 348f0
     <comp loc="(1430,1240)" name="JC16_16bit_8bit_stepdown"/>
     <comp loc="(1430,1290)" name="JC16_16bit_8bit_stepdown"/>
     <comp loc="(1430,1340)" name="JC16_16bit_8bit_stepdown"/>
-    <wire from="(1150,650)" to="(1150,680)"/>
-    <wire from="(1150,700)" to="(1280,700)"/>
-    <wire from="(1150,720)" to="(1170,720)"/>
-    <wire from="(1150,740)" to="(1180,740)"/>
-    <wire from="(1150,760)" to="(1270,760)"/>
-    <wire from="(1150,780)" to="(1290,780)"/>
+    <wire from="(1010,510)" to="(1010,540)"/>
+    <wire from="(1130,650)" to="(1130,700)"/>
+    <wire from="(1130,700)" to="(1150,700)"/>
+    <wire from="(1150,680)" to="(1290,680)"/>
+    <wire from="(1150,720)" to="(1270,720)"/>
+    <wire from="(1150,740)" to="(1170,740)"/>
+    <wire from="(1150,760)" to="(1180,760)"/>
+    <wire from="(1150,780)" to="(1230,780)"/>
     <wire from="(1150,800)" to="(1250,800)"/>
     <wire from="(1150,820)" to="(1220,820)"/>
     <wire from="(1150,840)" to="(1190,840)"/>
     <wire from="(1150,860)" to="(1200,860)"/>
     <wire from="(1150,880)" to="(1210,880)"/>
     <wire from="(1170,1220)" to="(1410,1220)"/>
-    <wire from="(1170,720)" to="(1170,1220)"/>
-    <wire from="(1180,630)" to="(1180,740)"/>
+    <wire from="(1170,740)" to="(1170,1220)"/>
+    <wire from="(1180,630)" to="(1180,760)"/>
     <wire from="(1190,1040)" to="(1190,1340)"/>
     <wire from="(1190,1040)" to="(1230,1040)"/>
     <wire from="(1190,1340)" to="(1210,1340)"/>
@@ -196,12 +206,13 @@ c00004 c10008 c20005 c30007 24f0 26cf0 100f0 348f0
     <wire from="(1220,1130)" to="(1230,1130)"/>
     <wire from="(1220,1210)" to="(1430,1210)"/>
     <wire from="(1220,820)" to="(1220,1130)"/>
+    <wire from="(1230,780)" to="(1230,820)"/>
+    <wire from="(1230,820)" to="(1290,820)"/>
     <wire from="(1250,800)" to="(1250,860)"/>
     <wire from="(1250,860)" to="(1290,860)"/>
-    <wire from="(1270,760)" to="(1270,820)"/>
-    <wire from="(1270,820)" to="(1290,820)"/>
-    <wire from="(1280,700)" to="(1280,830)"/>
-    <wire from="(1280,830)" to="(1290,830)"/>
+    <wire from="(1270,720)" to="(1270,830)"/>
+    <wire from="(1270,830)" to="(1290,830)"/>
+    <wire from="(1290,680)" to="(1290,780)"/>
     <wire from="(1410,1180)" to="(1410,1220)"/>
     <wire from="(1410,1220)" to="(1420,1220)"/>
     <wire from="(1420,1180)" to="(1420,1220)"/>
@@ -226,15 +237,20 @@ c00004 c10008 c20005 c30007 24f0 26cf0 100f0 348f0
     <wire from="(1540,750)" to="(1540,860)"/>
     <wire from="(600,650)" to="(600,780)"/>
     <wire from="(600,650)" to="(640,650)"/>
-    <wire from="(640,650)" to="(1150,650)"/>
+    <wire from="(640,650)" to="(1130,650)"/>
     <wire from="(880,630)" to="(1180,630)"/>
     <wire from="(880,700)" to="(930,700)"/>
     <wire from="(880,840)" to="(890,840)"/>
     <wire from="(890,720)" to="(890,840)"/>
     <wire from="(890,720)" to="(930,720)"/>
+    <wire from="(910,510)" to="(1010,510)"/>
+    <wire from="(910,510)" to="(910,530)"/>
+    <wire from="(930,580)" to="(930,610)"/>
+    <wire from="(930,580)" to="(950,580)"/>
     <wire from="(930,610)" to="(930,680)"/>
     <wire from="(930,740)" to="(930,750)"/>
     <wire from="(930,750)" to="(1540,750)"/>
+    <wire from="(950,560)" to="(950,580)"/>
   </circuit>
   <circuit name="JCS1_FullAdder">
     <a name="appearance" val="logisim_evolution"/>
@@ -4583,13 +4599,6 @@ c00004 c10008 c20005 c30007 24f0 26cf0 100f0 348f0
       <a name="label" val="STRAM"/>
       <a name="output" val="true"/>
     </comp>
-    <comp lib="0" loc="(1360,860)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="RAM_ADDR"/>
-      <a name="output" val="true"/>
-      <a name="width" val="16"/>
-    </comp>
     <comp lib="0" loc="(1360,890)" name="Tunnel">
       <a name="label" val="pin_id_reg"/>
       <a name="width" val="3"/>
@@ -4608,14 +4617,21 @@ c00004 c10008 c20005 c30007 24f0 26cf0 100f0 348f0
       <a name="label" val="LDRAM"/>
       <a name="output" val="true"/>
     </comp>
-    <comp lib="0" loc="(1400,950)" name="Tunnel">
+    <comp lib="0" loc="(1410,950)" name="Tunnel">
       <a name="label" val="IS_PARALLEL"/>
+    </comp>
+    <comp lib="0" loc="(1410,980)" name="Constant">
+      <a name="value" val="0x0"/>
     </comp>
     <comp lib="0" loc="(1420,1470)" name="Splitter">
       <a name="facing" val="north"/>
     </comp>
     <comp lib="0" loc="(1440,1500)" name="Tunnel">
       <a name="label" val="rdpin_val"/>
+      <a name="width" val="16"/>
+    </comp>
+    <comp lib="0" loc="(1500,580)" name="Constant">
+      <a name="value" val="0x0"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(1510,830)" name="Pin">
@@ -4645,6 +4661,13 @@ c00004 c10008 c20005 c30007 24f0 26cf0 100f0 348f0
     <comp lib="0" loc="(1580,790)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="WRITE_P"/>
+    </comp>
+    <comp lib="0" loc="(1600,570)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="RAM_ADDR"/>
+      <a name="output" val="true"/>
+      <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(1650,1050)" name="Pin">
       <a name="appearance" val="classic"/>
@@ -4809,11 +4832,8 @@ c00004 c10008 c20005 c30007 24f0 26cf0 100f0 348f0
       <a name="label" val="r7"/>
       <a name="width" val="16"/>
     </comp>
-    <comp lib="0" loc="(880,640)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="ROM_ADDR"/>
-      <a name="output" val="true"/>
+    <comp lib="0" loc="(820,660)" name="Constant">
+      <a name="value" val="0x0"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(910,1040)" name="Tunnel">
@@ -4823,6 +4843,13 @@ c00004 c10008 c20005 c30007 24f0 26cf0 100f0 348f0
     <comp lib="0" loc="(910,980)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="IS_PARALLEL"/>
+    </comp>
+    <comp lib="0" loc="(920,650)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="ROM_ADDR"/>
+      <a name="output" val="true"/>
+      <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(940,990)" name="Tunnel">
       <a name="label" val="WRITE_P"/>
@@ -4915,8 +4942,19 @@ c00004 c10008 c20005 c30007 24f0 26cf0 100f0 348f0
       <a name="select" val="3"/>
       <a name="width" val="16"/>
     </comp>
+    <comp lib="3" loc="(1600,570)" name="Adder">
+      <a name="width" val="16"/>
+    </comp>
+    <comp lib="3" loc="(920,650)" name="Adder">
+      <a name="width" val="16"/>
+    </comp>
     <comp lib="4" loc="(1430,820)" name="D Flip-Flop">
       <a name="appearance" val="logisim_evolution"/>
+    </comp>
+    <comp lib="4" loc="(1500,550)" name="Register">
+      <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="RAM_SHIFT"/>
+      <a name="width" val="16"/>
     </comp>
     <comp lib="4" loc="(1700,1450)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
@@ -4941,6 +4979,11 @@ c00004 c10008 c20005 c30007 24f0 26cf0 100f0 348f0
     <comp lib="4" loc="(1780,1160)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
       <a name="width" val="1"/>
+    </comp>
+    <comp lib="4" loc="(820,630)" name="Register">
+      <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="ROM_SHIFT"/>
+      <a name="width" val="16"/>
     </comp>
     <comp loc="(1130,1180)" name="JCS1_ALU"/>
     <comp loc="(1360,690)" name="JCS1_Instruction_Decoder"/>
@@ -5012,6 +5055,7 @@ c00004 c10008 c20005 c30007 24f0 26cf0 100f0 348f0
     <wire from="(1360,750)" to="(1530,750)"/>
     <wire from="(1360,830)" to="(1410,830)"/>
     <wire from="(1360,840)" to="(1400,840)"/>
+    <wire from="(1360,860)" to="(1490,860)"/>
     <wire from="(1360,870)" to="(1390,870)"/>
     <wire from="(1360,880)" to="(1380,880)"/>
     <wire from="(1380,1060)" to="(1610,1060)"/>
@@ -5032,12 +5076,15 @@ c00004 c10008 c20005 c30007 24f0 26cf0 100f0 348f0
     <wire from="(1410,830)" to="(1410,870)"/>
     <wire from="(1410,830)" to="(1420,830)"/>
     <wire from="(1410,870)" to="(1420,870)"/>
+    <wire from="(1410,950)" to="(1410,980)"/>
     <wire from="(1420,1470)" to="(1420,1480)"/>
     <wire from="(1420,1480)" to="(1630,1480)"/>
     <wire from="(1450,880)" to="(1570,880)"/>
     <wire from="(1480,1070)" to="(1510,1070)"/>
     <wire from="(1480,1090)" to="(1480,1120)"/>
     <wire from="(1480,1120)" to="(1520,1120)"/>
+    <wire from="(1490,560)" to="(1490,860)"/>
+    <wire from="(1490,560)" to="(1560,560)"/>
     <wire from="(1510,1070)" to="(1510,1100)"/>
     <wire from="(1510,1100)" to="(1520,1100)"/>
     <wire from="(1530,750)" to="(1530,810)"/>

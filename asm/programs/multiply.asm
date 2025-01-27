@@ -29,8 +29,6 @@ mul_mv_bit_ptr_scope!:
     add rc, rc, (lshift ra, bit_ptr_reg!)                       ; then, add shifted operand A to result value
 
 mul_finish_scope!:
-    ; empty "dummy" routine to make jump possible, introduces minor overhead unfortunately
-    nop rc, rc, rc
 }
 
 main:
