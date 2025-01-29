@@ -150,7 +150,8 @@
       <a name="addrWidth" val="16"/>
       <a name="appearance" val="classic"/>
       <a name="contents">addr/data: 16 24
-c00000 800002 301 5703ff 880002 f80000
+c00006 c10007 c20000 132301 880006 240f0 400301 492301
+900003 f80000
 </a>
       <a name="dataWidth" val="24"/>
     </comp>
