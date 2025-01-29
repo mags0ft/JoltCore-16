@@ -1,3 +1,5 @@
+The project is now mostly finished.
+
 Proposals by Mr. Furber and ideas I had:
     [X] extend assembly language using syntax to differentiate between registers and immediates, like:
         "add r0 r1 #3           ; adds register 1 and number 3 together and writes back to register 0"
@@ -8,7 +10,7 @@ Proposals by Mr. Furber and ideas I had:
         "sub r2 (xor r0 #6) r1  ; subtracts register 1 from the result of bitwise-xoring register 0 with 0b110"
 
 For the implementation in the logic simulator specifically:
-    [ ] implement basic parallelization (as this is no ISA or specification feature, it only belongs in this category)
+    [X] implement basic parallelization (as this is no ISA or specification feature, it only belongs in this category)
     [X] fully add the instruction decoder logic to gather flag and instruction body (this may meddle with the existing wiring)
 
 Things I added on top of this (QoL/comfort features):
