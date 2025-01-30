@@ -26,9 +26,16 @@ mul_skip_add_scope!:
 }
 
 main:
+    ldi r7, #32                                 ; we want to perform 32 rounds of multiplication
+
+loop:
     ldi r0, EXAMPLE_OP_A!
     ldi r1, EXAMPLE_OP_B!
 
     multiply!                                   ; invoke the definition
 
+    sub r7, r7, #1
+    jnz loop
+
+finish:
     halt
