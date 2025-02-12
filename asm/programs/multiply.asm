@@ -29,8 +29,8 @@ main:
     ldi r7, #32                                 ; we want to perform 32 rounds of multiplication
 
 loop:
-    ldi r0, EXAMPLE_OP_A!
-    ldi r1, EXAMPLE_OP_B!
+    ldi operand_a_reg!, EXAMPLE_OP_A!
+    ldi operand_b_reg!, EXAMPLE_OP_B!
 
     multiply!                                   ; invoke the definition
 
