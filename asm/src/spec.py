@@ -23,4 +23,4 @@ AVAILABLE_ROM = MAX_INT
 # length in bits of each instruction
 INSTRUCTION_LENGTH = 24
 
-OUTPUT_EXTENSIONS = {"b": "bin", "B": "bbin", "x": "hex", "r": "rom"}
+OUTPUT_EXTENSIONS = {"b": "bin", "B": "bbin", "x": "hex", "r": "rom", "p": "asm"}

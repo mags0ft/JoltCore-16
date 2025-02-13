@@ -86,6 +86,8 @@ an internal assembler error)"
                 res += int(instr, 2).to_bytes(4, "big")
 
             yield (res, OUTPUT_EXTENSIONS[format_], True)
+        elif format_ == "p":
+            pass
         else:
             codegen_error(f'unknown output format "{format_}"')
 

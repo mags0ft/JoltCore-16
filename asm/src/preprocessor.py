@@ -1,5 +1,6 @@
 import string
 from uuid import uuid4
+from bin_generator import write
 from error_handling import preprocess_debug_info, preprocess_error
 
 
@@ -27,7 +28,7 @@ def comment_out_lines(text: str, lines: set) -> str:
     )
 
 
-def run_preprocessing_passes(text: str, debug_info: bool):
+def run_preprocessing_passes(text: str, debug_info: bool, args=None):
     definitions = {}
     preprocessor_directive_lines = set()
 
@@ -149,5 +150,8 @@ def run_preprocessing_passes(text: str, debug_info: bool):
         preprocess_debug_info(f"{passes} pass(es) done")
 
     text = comment_out_lines(text, preprocessor_directive_lines)
+
+    if args is not None and "p" in args.format:
+        write(text, args.output + (f".asm" if not args.noext else ""), False)
 
     return text

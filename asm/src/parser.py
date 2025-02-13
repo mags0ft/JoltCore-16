@@ -22,7 +22,7 @@ class LineOfCode:
 
 
 def build_instructions(
-    input_file: str, optimize: bool = False, debug_info: bool = False
+    input_file: str, optimize: bool = False, debug_info: bool = False, args=None
 ):
     if not os.path.isfile(input_file):
         parse_error(f'cannot open file "{input_file}".')
@@ -30,7 +30,7 @@ def build_instructions(
     with open(input_file, "r") as f:
         content = f.read()
 
-    content = run_preprocessing_passes(content, debug_info)
+    content = run_preprocessing_passes(content, debug_info, args)
 
     return parse_file(content, optimize, debug_info)
 

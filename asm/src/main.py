@@ -25,7 +25,7 @@ p.add_argument(
 p.add_argument(
     "-f",
     "--format",
-    help="Which format(s) to use when exporting (possible: b, B, r, x)",
+    help=f"Which format(s) to use when exporting (possible: {', '.join(OUTPUT_EXTENSIONS.keys())})",
     default="brx",
 )
 p.add_argument(
@@ -66,7 +66,7 @@ def main():
     output_file: str = args.output
 
     parsed: "list[Instruction]" = build_instructions(
-        input_file, args.optimize, args.debug
+        input_file, args.optimize, args.debug, args
     )
 
     for build, extension, binary in generate_build_from_parsed(
