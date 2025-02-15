@@ -120,13 +120,18 @@ def run_preprocessing_passes(text: str, debug_info: bool, args=None):
     if debug_info:
         preprocess_debug_info(f"{len(definitions)} definition(s) found")
 
+    def remove_preprocessed_lines():
+        return "\n".join(
+            [
+                remove_comment_from_line(i)
+                for i in comment_out_lines(
+                    text, preprocessor_directive_lines
+                ).splitlines()
+            ]
+        )
+
     passes = 0
-    while "!" in "\n".join(
-        [
-            remove_comment_from_line(i)
-            for i in comment_out_lines(text, preprocessor_directive_lines).splitlines()
-        ]
-    ):
+    while "!" in remove_preprocessed_lines():
         for key, value in definitions.items():
             while True:
                 uuid: str = str(uuid4()).replace("-", "_")
@@ -142,8 +147,11 @@ def run_preprocessing_passes(text: str, debug_info: bool, args=None):
         passes += 1
 
         if passes > 1024:
+            t = [i.strip() for i in remove_preprocessed_lines().split()]
             preprocess_error(
                 "circular reference detected in pre-processing definitions or undefined definition"
+                "\n    affected definitions: \n\t- "
+                + "\n\t- ".join(filter(lambda s: s.endswith("!"), t))
             )
 
     if debug_info:
