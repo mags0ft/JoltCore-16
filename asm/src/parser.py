@@ -30,7 +30,7 @@ def build_instructions(
     with open(input_file, "r") as f:
         content = f.read()
 
-    content = run_preprocessing_passes(content, debug_info, args)
+    content = run_preprocessing_passes(content, debug_info, input_file, args)
 
     return parse_file(content, optimize, debug_info)
 

@@ -1,3 +1,5 @@
+include asm/libraries/math.asm
+
 ; Test program for the assembler to compile into binary machine instructions.
 ; Let's start with something simple...
 
@@ -19,5 +21,7 @@ main:                       ; main should be moved to the top by the assembler
     add r0, r0, #0            ; do nothing to test optimization features
     rshift rb, rb, #0         ; again, just in another manner
     lshift rb, rb, #2         ; this should not be optimized away
+
+    mlib_multiply!
 
     jmp jumptest            ; go to our jumptest code block

@@ -3,8 +3,8 @@ from uuid import uuid4
 from bin_generator import write
 from error_handling import preprocess_debug_info, preprocess_error
 
-
 ALLOWED_DEFINITION_NAMES: str = string.ascii_letters + string.digits + "_"
+INCLUDE_KEYWORD: str = "include "
 
 
 def remove_comment_from_line(line: str) -> str:
@@ -28,8 +28,8 @@ def comment_out_lines(text: str, lines: set) -> str:
     )
 
 
-def run_preprocessing_passes(text: str, debug_info: bool, args=None):
-    definitions = parse_directives(text)
+def run_preprocessing_passes(text: str, debug_info: bool, file: str, args=None):
+    definitions = parse_directives(text, debug_info, file)
 
     if debug_info:
         preprocess_debug_info(f"{len(definitions)} definition(s) found")
@@ -81,18 +81,27 @@ def run_preprocessing_passes(text: str, debug_info: bool, args=None):
 
 def find_preprocessor_directive_lines(text):
     lines: "set[int]" = set()
-    line: int = 1
+    line: int = 0
 
     in_comment: bool = False
     in_definition: bool = False
 
+    cur_line: str = ""
+
     for char in text:
+        cur_line += char
+
         if char == "\n":
             if in_definition:
                 lines.add(line)
 
             line += 1
             in_comment = False
+
+            if cur_line.strip().startswith(INCLUDE_KEYWORD):
+                lines.add(line)
+
+            cur_line = ""
         elif char == ";":
             in_comment = True
         elif char == "{" and not in_comment:
@@ -104,7 +113,7 @@ def find_preprocessor_directive_lines(text):
     return lines
 
 
-def parse_directives(text):
+def parse_directives(text: str, debug_info: bool, file: str):
     definitions: "dict[str, str]" = {}
 
     line: int = 1
@@ -115,6 +124,30 @@ def parse_directives(text):
     definition_phase: int = 0
     cur_definition_name: str = ""
     cur_definition_content: str = ""
+
+    # FILE INCLUDES
+
+    for line_idx, line_ in enumerate([i.strip() for i in text.splitlines()]):
+        if line_.startswith(INCLUDE_KEYWORD):
+            filename: str = line_[len(INCLUDE_KEYWORD) :]
+            try:
+                with open(filename, "r") as f:
+                    included_file_data = f.read()
+
+                if debug_info:
+                    preprocess_debug_info(f'including file "{filename}"')
+
+                definitions.update(
+                    parse_directives(included_file_data, debug_info, filename)
+                )
+
+            except FileNotFoundError:
+                preprocess_error(
+                    f'cannot include file "{filename}": file not found',
+                    {"line": line_idx + 1, "in file": file},
+                )
+
+    # DEFINITIONS
 
     for char in text:
         if char == ";":
@@ -137,7 +170,12 @@ def parse_directives(text):
             elif definition_phase == 2:
                 preprocess_error(
                     "you cannot use nested definitions",
-                    {"line": line, "col": col, "definition name": cur_definition_name},
+                    {
+                        "line": line,
+                        "col": col,
+                        "definition name": cur_definition_name,
+                        "in file": file,
+                    },
                 )
             else:
                 preprocess_error('stray "{"', {"line": line, "col": col})
@@ -154,10 +192,7 @@ def parse_directives(text):
                 if cur_definition_name in definitions:
                     preprocess_error(
                         f'you already defined "{cur_definition_name}"',
-                        {
-                            "line": line,
-                            "col": col,
-                        },
+                        {"line": line, "col": col, "in file": file},
                     )
 
                 if any(
@@ -169,6 +204,7 @@ def parse_directives(text):
                             "line": line,
                             "col": col,
                             "definition name": cur_definition_name,
+                            "in file": file,
                         },
                     )
 

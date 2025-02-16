@@ -53,8 +53,8 @@ an internal assembler error)"
     if debug_info:
         codegen_debug_info(
             f"""compilation succeeded!
-    {instr_used} instructions used ({(instr_used*INSTRUCTION_LENGTH)/1024:.2f} KiB)
-    {(instr_used/AVAILABLE_ROM)*100:.1f}% of {(AVAILABLE_ROM)/1024:.1f} KiB ROM occupied"""
+    {instr_used} instructions used ({(instr_used*INSTRUCTION_LENGTH)/1024:.3f} KiB)
+    {(instr_used/AVAILABLE_ROM)*100:.4f}% of {(AVAILABLE_ROM)/1024:.0f} KiB ROM occupied"""
         )
 
     for format_ in formats:
