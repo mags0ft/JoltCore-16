@@ -29,20 +29,94 @@ def comment_out_lines(text: str, lines: set) -> str:
 
 
 def run_preprocessing_passes(text: str, debug_info: bool, args=None):
-    definitions = {}
-    preprocessor_directive_lines = set()
+    definitions = parse_directives(text)
 
-    line, col = 1, 0
-    cur = ""
-    in_comment = False
-    definition_phase = 0
-    cur_definition_name = ""
-    cur_definition_content = ""
+    if debug_info:
+        preprocess_debug_info(f"{len(definitions)} definition(s) found")
+
+    def remove_preprocessed_lines():
+        return "\n".join(
+            [
+                remove_comment_from_line(i)
+                for i in comment_out_lines(
+                    text, find_preprocessor_directive_lines(text)
+                ).splitlines()
+            ]
+        )
+
+    passes = 0
+    while "!" in remove_preprocessed_lines():
+        for key, value in definitions.items():
+            while True:
+                uuid: str = str(uuid4()).replace("-", "_")
+
+                altered_value = value.replace("scope!", uuid)
+
+                prev_text: str = text
+                text = text.replace(key, altered_value, 1)
+
+                if prev_text == text:
+                    break
+
+        passes += 1
+
+        if passes > 1024:
+            t = [i.strip() for i in remove_preprocessed_lines().split()]
+            preprocess_error(
+                "undefined definition or circular reference detected in pre-processing definitions"
+                "\n    affected definitions: \n\t- "
+                + "\n\t- ".join(filter(lambda s: s.endswith("!"), t))
+            )
+
+    if debug_info:
+        preprocess_debug_info(f"{passes} pass(es) done")
+
+    text = comment_out_lines(text, find_preprocessor_directive_lines(text))
+
+    if args is not None and "p" in args.format:
+        write(text, args.output + (f".asm" if not args.noext else ""), False)
+
+    return text
+
+
+def find_preprocessor_directive_lines(text):
+    lines: "set[int]" = set()
+    line: int = 1
+
+    in_comment: bool = False
+    in_definition: bool = False
 
     for char in text:
-        if definition_phase in [1, 2]:
-            preprocessor_directive_lines.add(line)
+        if char == "\n":
+            if in_definition:
+                lines.add(line)
 
+            line += 1
+            in_comment = False
+        elif char == ";":
+            in_comment = True
+        elif char == "{" and not in_comment:
+            in_definition = True
+        elif char == "}" and not in_comment:
+            in_definition = False
+            lines.add(line)
+
+    return lines
+
+
+def parse_directives(text):
+    definitions: "dict[str, str]" = {}
+
+    line: int = 1
+    col: int = 0
+    cur: str = ""
+
+    in_comment: bool = False
+    definition_phase: int = 0
+    cur_definition_name: str = ""
+    cur_definition_content: str = ""
+
+    for char in text:
         if char == ";":
             in_comment = True
 
@@ -117,49 +191,4 @@ def run_preprocessing_passes(text: str, debug_info: bool, args=None):
             cur_definition_name = ""
             cur = ""
 
-    if debug_info:
-        preprocess_debug_info(f"{len(definitions)} definition(s) found")
-
-    def remove_preprocessed_lines():
-        return "\n".join(
-            [
-                remove_comment_from_line(i)
-                for i in comment_out_lines(
-                    text, preprocessor_directive_lines
-                ).splitlines()
-            ]
-        )
-
-    passes = 0
-    while "!" in remove_preprocessed_lines():
-        for key, value in definitions.items():
-            while True:
-                uuid: str = str(uuid4()).replace("-", "_")
-
-                altered_value = value.replace("scope!", uuid)
-
-                prev_text: str = text
-                text = text.replace(key, altered_value, 1)
-
-                if prev_text == text:
-                    break
-
-        passes += 1
-
-        if passes > 1024:
-            t = [i.strip() for i in remove_preprocessed_lines().split()]
-            preprocess_error(
-                "circular reference detected in pre-processing definitions or undefined definition"
-                "\n    affected definitions: \n\t- "
-                + "\n\t- ".join(filter(lambda s: s.endswith("!"), t))
-            )
-
-    if debug_info:
-        preprocess_debug_info(f"{passes} pass(es) done")
-
-    text = comment_out_lines(text, preprocessor_directive_lines)
-
-    if args is not None and "p" in args.format:
-        write(text, args.output + (f".asm" if not args.noext else ""), False)
-
-    return text
+    return definitions
