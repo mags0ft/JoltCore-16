@@ -22,6 +22,4 @@ main:                       ; main should be moved to the top by the assembler
     rshift rb, rb, #0         ; again, just in another manner
     lshift rb, rb, #2         ; this should not be optimized away
 
-    mlib_multiply!
-
     jmp jumptest            ; go to our jumptest code block

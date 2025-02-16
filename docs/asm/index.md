@@ -8,6 +8,7 @@ The following pages document the JC16 assembly language and the JCASM (JC16 asse
 - [preprocessor directives](./preprocessor/index.md)
     - [definitions](./preprocessor/definitions.md)
     - [scopes](./preprocessor/scopes.md)
+    - [includes](./preprocessor/includes.md)
 - [JCASM](./jcasm/index.md)
     - [assembler flags](./jcasm/flags.md)
     - [optimization](./jcasm/optimization.md)

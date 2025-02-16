@@ -19,6 +19,7 @@ Click on a link to get started.
     - [preprocessor directives](./asm/preprocessor/index.md)
         - [definitions](./asm/preprocessor/definitions.md)
         - [scopes](./asm/preprocessor/scopes.md)
+        - [includes](./asm/preprocessor/includes.md)
     - [JCASM](./asm/jcasm/index.md)
         - [assembler flags](./asm/jcasm/flags.md)
         - [optimization](./asm/jcasm/optimization.md)
