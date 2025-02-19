@@ -36,13 +36,16 @@ The order of those does not matter and you can put the `main` label wherever you
 
 ## Immediates, registers and addresses
 
-Immediates are denoted by a hashtag in front of them:
+Immediates are denoted by a hashtag in front of them - you can also use chars inside assembly source code which will be converted to their respective ASCII codepoint upon assembly:
 
 ```
 main:
-    add r0, r0, #4      ; load immediate 4
+    add r0, r0, #4      ; load immediate 4 ...
+    add r0, r0, #A      ; ... or try chars - this is number 65!
     halt
 ```
+
+(To denote special characters like spaces, you can still use the integer notation - for example, a space in ASCII is number 32, which allows you to use it by simply loading the immediate `#32` into a register!)
 
 Registers are denoted by an `r` in front of them and can either be written using numbers from 0 to 7 or alphabetic letters from a to h:
 
