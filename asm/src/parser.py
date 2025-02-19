@@ -211,12 +211,27 @@ def parse_line(l: LineOfCode, block_names: "dict[str, int]") -> Instruction:
                             "unable to resolve register",
                             {"line": l.original_line + 1, "argument": arg},
                         )
+                else:
+                    try:
+                        reg_to_use = int(arg[1:])
+                    except ValueError:
+                        try:
+                            reg_to_use = int(arg[1:], 16)
+                        except ValueError:
+                            parse_error(
+                                "static addresses shall only use decimal or hexadeximal numbers",
+                                {"line": l.original_line + 1, "argument": arg},
+                            )
 
                 args_res.append(Argument(0, reg_to_use))
 
             elif arg.startswith("#"):
                 # immediate argument!
-                immediate_value = int(arg[1:])
+                try:
+                    immediate_value = int(arg[1:])
+                except ValueError:
+                    immediate_value = ord(arg[-1])
+
                 if immediate_value > MAX_INLINE_IMMEDIATE:
                     parse_error(
                         f"inline immediates are limited to {INLINE_IMMEDIATE_BIT_COUNT} bits, so they cannot exceed {MAX_INLINE_IMMEDIATE}.",

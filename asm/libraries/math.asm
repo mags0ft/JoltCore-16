@@ -6,7 +6,7 @@ define mlib_operand_b_reg { rb }
 define mlib_res_reg { rc }
 define mlib_remainder_reg { rd }
 
-define __mlib_dummy_reg { re }
+define __dummy_reg { re }
 
 define __mlib_BIT_LENGTH { #16 }
 
@@ -14,7 +14,7 @@ define mlib_multiply {
     ldi mlib_res_reg!, #0                                               ; init result to zero
 
 mul_add_scope!:
-    and __mlib_dummy_reg!, mlib_operand_b_reg!, #1                      ; least significant bit of r1 is 1?
+    and __dummy_reg!, mlib_operand_b_reg!, #1                           ; least significant bit of r1 is 1?
     jiz mul_skip_add_scope!                                             ; no: skip the addition
     add mlib_res_reg!, mlib_res_reg!, mlib_operand_a_reg!               ; else: add to r2
 

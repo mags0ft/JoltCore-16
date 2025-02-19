@@ -17,10 +17,10 @@ MAX_ENCAPSULATED_INSTRUCTION_INLINE_IMMEDIATE = (
 # Highest integer the CPU can handle
 MAX_INT = (2**BIT_COUNT) - 1
 
-# maximum ROM the CPU can use
-AVAILABLE_ROM = MAX_INT
-
 # length in bits of each instruction
 INSTRUCTION_LENGTH = 24
+
+# maximum ROM the CPU can use
+AVAILABLE_ROM = MAX_INT * (INSTRUCTION_LENGTH // 8)
 
 OUTPUT_EXTENSIONS = {"b": "bin", "B": "bbin", "x": "hex", "r": "rom", "p": "asm"}
