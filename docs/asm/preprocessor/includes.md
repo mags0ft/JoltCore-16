@@ -26,7 +26,7 @@ main:
 
 Note that this statement will only import preprocessor definitions, not any actual code blocks like `main` - this behavior is intentional, as including files would otherwise always either...
 
-- A\) require each of the included files not to have any code but only definitions - and thus not be compilable as standalones, or
+- A\) require each of the included files not to have any code but only definitions - and thus not be possible to assemble as standalones, or
 - B\) let the files work as standalones, too, but import potentially several `main` code blocks into the file that is including them, causing conflicts.
 
 Thus, the design decision of only importing preprocessor definitions was made.
