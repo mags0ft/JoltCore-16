@@ -1,6 +1,6 @@
 # Parallelization
 
-The JC16 CPU is able to determine a given pair of instructions to be able to run in parallel. This significantly increases throughput, with the important drawback of it requiring twice the RAM bandwidth.
+The JC16 CPU is able to determine a given pair of instructions to be able to run in parallel. This significantly increases throughput, with the important drawback of it requiring twice the ROM bandwidth.
 
 ## Requirements
 
