@@ -1,7 +1,7 @@
 # Memory management
 
 To work with the up to 128 KiB of external addressable RAM, the JC16 allows you to utilize two instructions for reading from and writing to RAM.
-As the ISA is designed in a way that forces every instruction to execute in exactly one clock cycle, the RAM must have an acccordingly low latency.
+As the ISA is designed in a way that forces every instruction to execute in exactly one clock cycle, the RAM must have an accordingly low latency.
 
 ## Read data from RAM
 
@@ -32,3 +32,5 @@ main:
     stram r0, $0
     halt
 ```
+
+Support for storing and loading dynamic RAM addresses defined by register values may be added in the future; for now, RAM addresses are to be defined statically.
