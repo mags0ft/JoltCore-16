@@ -19,14 +19,19 @@ class JC16v2CPU {
             while (running) {
                 clock_cycle();
             }
+
+            Output::print_info("program execution terminated, took " + std::to_string(clock_cycles_passed) + " clock cycle(s)");
         }
 
     private:
         void clock_cycle() {
             FileReader::Command command = rom.at(pc);
 
+            pc++;
+
             switch (command.opcode) {
                 case 0b11111:
+                    Output::print_info("halt instruction invoked");
                     running = false;
                     break;
                 

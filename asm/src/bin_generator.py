@@ -83,7 +83,7 @@ an internal assembler error)"
             # raw_instr = [int(i, 2) for i in ]
 
             for instr in blockify(generated).splitlines():
-                res += int(instr, 2).to_bytes(4, "big")
+                res += int(instr, 2).to_bytes(3, "little")
 
             yield (res, OUTPUT_EXTENSIONS[format_], True)
         elif format_ == "p":

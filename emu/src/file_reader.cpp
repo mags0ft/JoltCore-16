@@ -58,14 +58,14 @@ namespace FileReader {
         }
 
         while (true) {
-            std::vector<char> bytes(3);
+            uint8_t buffer[3];
             uint32_t instruction = 0;
 
-            file.read(bytes.data(), 3);
+            file.read(reinterpret_cast<char*>(buffer), 3);
 
-            instruction |= (static_cast<uint8_t>(bytes[0]) << 16);
-            instruction |= (static_cast<uint8_t>(bytes[1]) << 8);
-            instruction |= static_cast<uint8_t>(bytes[2]);
+            instruction |= (static_cast<uint32_t>(buffer[2]) << 16);
+            instruction |= (static_cast<uint32_t>(buffer[1]) << 8);
+            instruction |= static_cast<uint32_t>(buffer[0]);
 
             res.push_back(decode_instruction(instruction));
     
