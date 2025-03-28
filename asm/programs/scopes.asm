@@ -15,4 +15,4 @@ main:
     ldi r0 #32                  ; and now from 32 to zero
     countdown!
 
-halt
+    halt

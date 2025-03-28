@@ -108,7 +108,7 @@ def find_preprocessor_directive_lines(text):
             in_definition = True
         elif char == "}" and not in_comment:
             in_definition = False
-            lines.add(line)
+            lines.update([line, line + 1])
 
     return lines
 
