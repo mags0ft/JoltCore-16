@@ -2,6 +2,7 @@
 
 #include "file_reader.cpp"
 #include <cstdint>
+#include <chrono>
 
 class JC16v2CPU
 {
@@ -21,12 +22,20 @@ public:
 
     void run()
     {
+        auto start = std::chrono::high_resolution_clock::now();
+
         while (running)
         {
             clock_cycle();
         }
 
-        Output::print_info("program execution terminated, took " + std::to_string(clock_cycles_passed) + " clock cycle(s)");
+        auto end = std::chrono::high_resolution_clock::now();
+
+        std::chrono::duration<double, std::milli> duration = end - start;
+        Output::print_info(
+            "program execution terminated, took " + std::to_string(clock_cycles_passed) +
+            " clock cycle(s) and " + std::to_string(duration.count()) + "ms (avg clock speed " +
+            std::to_string((clock_cycles_passed / (duration.count() / 1000)) / 1000000) + " MHz)");
     }
 
     void oclk()
