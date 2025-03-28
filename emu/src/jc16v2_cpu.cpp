@@ -95,12 +95,15 @@ private:
 
             case 0b11000:
                 registers[command.target_reg] = command.instruction_body;
+                break;
 
             case 0b11001:
                 registers[command.target_reg] = ram[command.instruction_body];
+                break;
 
             case 0b11010:
                 ram[command.instruction_body] = registers[command.target_reg];
+                break;
 
             case 0b11011:
                 // I/O system not implemented yet; this would be rdpin ...
