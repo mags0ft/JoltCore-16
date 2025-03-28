@@ -1,5 +1,6 @@
 #include <string>
-namespace Config {
+namespace Config
+{
 
     const std::string VERSION = "v0.0.1";
 

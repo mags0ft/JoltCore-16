@@ -3,10 +3,12 @@
 #include "output.cpp"
 #include "config.cpp"
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[])
+{
     Output::print_info("version " + Config::VERSION);
 
-    if (argc < 2) {
+    if (argc < 2)
+    {
         Output::print_info("usage: ./jcemu [filename]");
         return -1;
     }
