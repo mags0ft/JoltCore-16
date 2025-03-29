@@ -14,7 +14,7 @@ public:
     unsigned short registers[8];
     unsigned short pc = 0;
 
-    long clock_cycles_passed = 0;
+    unsigned long clock_cycles_passed = 0;
     bool running = true;
 
     uint16_t alu_last_res;
