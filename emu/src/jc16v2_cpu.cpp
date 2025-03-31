@@ -34,8 +34,8 @@ public:
         std::chrono::duration<double, std::milli> duration = end - start;
         Output::print_info(
             "program execution terminated, took " + std::to_string(clock_cycles_passed) +
-            " clock cycle(s) and " + std::to_string(duration.count()) + "ms (avg clock speed " +
-            std::to_string((clock_cycles_passed / (duration.count() / 1000)) / 1000000) + " MHz)");
+            " clock cycle(s) and " + std::to_string(duration.count()) + "ms (avg speed " +
+            std::to_string((clock_cycles_passed / (duration.count() / 1000)) / 1000000) + " MIPS)");
     }
 
     void oclk()
