@@ -6,7 +6,7 @@
     <h1 align="center">JoltCore Spark 16 (JC16)</h1>
 </p>
 
-This is a fun little project I did in 2 weeks on vacation, however it has now been expanded with many more hours invested into it. It is an **extension of my original 8-bit CPU** which is now **16 bits**, has **8 general purpose 16 bit registers**, I/O ports, up to **128KiB RAM and ROM**, basic maths and logical instructions, a fairly mature assembler and more.
+This is a fun little project I did in 2 weeks on vacation, however it has now been expanded with many more hours invested into it. It is an **extension of my original 8-bit CPU** which is now **16 bits**, has **8 general purpose 16 bit registers**, I/O ports, up to **128KiB RAM and ROM**, basic maths and logical instructions, a fairly mature assembler, basic and performant emulator written in C++. and more.
 
 > [!IMPORTANT]  
 > The entire CPU is a custom design, from bit shifter to ISA.
@@ -56,10 +56,15 @@ A command to assemble into all possible output formats, using debug output and o
 $ ./jcasm ./asm/programs/fibonacci.asm -o ./asm/build/fibonacci.out -dO -f bBrx
 ```
 
+The emulator can be found in `emu`. It is written in C++. As of right now, only files exported from the assembler in the raw ROM format can be used. This is how it can be used:
+
+```bash
+$ ./jcemu ./asm/build/fibonacci.out
+```
+
 > [!NOTE]
 > You need Logisim Evolution to use this project. It is an open source logic simulator available here:
 > https://github.com/logisim-evolution/logisim-evolution
-
 
 ---
 
