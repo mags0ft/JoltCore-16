@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# --- CONSTANTS ---
+
+PROGRAM_NAME="build_jcemu"
+SOURCE="./emu/src/main.cpp"
+OUTPUT_DIR="./emu/build"
+BUILD_PATH="$OUTPUT_DIR/jcemu"
+COMPILE_ARGS="-Ofast -flto -funroll-loops -march=native -Wall -Wextra"
+SUCCESS_MESSAGE="$PROGRAM_NAME: successfully built jcemu using"
+START_COMPILATION_MESSAGE="$PROGRAM_NAME: begin compilation"
+
+# --- BUILD ---
+
+# Create the directory if it doesn't exist
+mkdir -p "$OUTPUT_DIR"
+
+# Now check if we have g++ installed:
+if command -v g++ &> /dev/null; then
+    echo $START_COMPILATION_MESSAGE
+    g++ $COMPILE_ARGS "$SOURCE" -o "$BUILD_PATH"
+    echo "$SUCCESS_MESSAGE g++"
+
+# if not, check if clang++ is there:
+elif command -v clang++ &> /dev/null; then
+    echo $START_COMPILATION_MESSAGE
+    clang++ $COMPILE_ARGS "$SOURCE" -o "$BUILD_PATH"
+    echo "$SUCCESS_MESSAGE clang++"
+
+# if neither: error out
+else
+    echo "$PROGRAM_NAME: cannot compile jcemu: neither g++ nor clang++ installed" >&2
+    exit 1
+fi

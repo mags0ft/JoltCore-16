@@ -17,8 +17,8 @@ public:
     long clock_cycles_passed = 0;
     bool running = true;
 
-    uint16_t alu_last_res;
-    bool alu_had_carry;
+    uint16_t alu_last_res = 0;
+    bool alu_had_carry = false;
 
     void run()
     {
