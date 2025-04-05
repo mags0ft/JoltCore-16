@@ -1,6 +1,6 @@
 # ALU-specific instruction set architecture
 
-The ALU instructions are certainly one of the most important ones - they are the integral part to all calculations done by the JC16 CPU.
+The ALU instructions are certainly one of the most important ones - they are an integral part to all calculations done by the JC16 CPU.
 
 ## Table of contents
 
@@ -23,7 +23,7 @@ ALU instructions follow a specific format:
         - immediate flag (1 bit)
     - or: arbitrary 8-bit [immediate](./inline-immediates.md)
 
-The only exception to this is the bitwise `not` operation and `nop` - these ignore the second operand B.
+The only exceptions to this are the bitwise `not` operation and `nop` - these ignore the second operand B.
 
 Available operations are:
 
@@ -37,8 +37,8 @@ Available operations are:
 - `nor`: bitwise NOR
 - `lshift`: left-shift operand A by operand B
 - `rshift`: right-shift operand A by operand B
-- `gt`: check if operand A is greater than operand B - returns `0b1` is true, `0b0` if false.
-- `lt`: check if operand B is less than operand B - returns the same scheme as `gt`
+- `gt`: check if operand A is greater than operand B - returns `0b1` if true, `0b0` if false.
+- `lt`: check if operand A is less than operand B - returns the same scheme as `gt`
 - `eq`: check if the operands are equal - returns the same scheme as `gt`
 - `nop`: do nothing to the operands and write back operand A into the target register (operand B is ignored)
 
