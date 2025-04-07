@@ -26,5 +26,6 @@ Click on a link to get started.
         - [output formats](./asm/jcasm/formats.md)
     - [comments](./asm/comments.md)
     - [best-practices](./asm/best-practices.md)
+- [Emulation](./emu/index.md)
 
 Feel free to open an issue on GitHub if you face any issues you couldn't solve by searching the documentation.
