@@ -6,7 +6,7 @@
     <h1 align="center">JoltCore Spark 16 (JC16)</h1>
 </p>
 
-This is a fun little project I did in 2 weeks on vacation, however it has now been expanded with many more hours invested into it. It is an **extension of my original 8-bit CPU** which is now **16 bits**, has **8 general purpose 16 bit registers**, I/O ports, up to **128KiB RAM and ROM**, basic maths and logical instructions, a fairly mature assembler, basic and performant emulator written in C++. and more.
+This is a fun little project I did in 2 weeks on vacation, however it has now been expanded with many more hours invested into it. It is an **extension of my original 8-bit CPU** which is now **16 bits**, has **8 general purpose 16 bit registers**, I/O ports, up to **128KiB RAM and ROM**, basic maths and logical instructions, a fairly mature assembler, basic and performant emulator written in C++ and more.
 
 > [!IMPORTANT]  
 > The entire CPU is a custom design, from bit shifter to ISA.
