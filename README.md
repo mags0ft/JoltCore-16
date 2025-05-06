@@ -53,13 +53,13 @@ You can find the assembler in the respective folder, `asm`. It is written in Pyt
 A command to assemble into all possible output formats, using debug output and optimizations could look like this:
 
 ```bash
-$ ./jcasm ./asm/programs/fibonacci.asm -o ./asm/build/fibonacci.out -dO -f bBrx
+./jcasm ./asm/programs/fibonacci.asm -o ./asm/build/fibonacci.out -dO -f bBrx
 ```
 
 The emulator can be found in `emu`. It is written in C++. As of right now, only files exported from the assembler in the raw ROM format can be used. This is how it can be used:
 
 ```bash
-$ ./jcemu ./asm/build/fibonacci.out
+./jcemu ./asm/build/fibonacci.out
 ```
 
 > [!NOTE]
