@@ -17,4 +17,4 @@ main:
     halt                           ; stop the program execution
 
 ; build in all possible formats using:
-; $ ./jcasm ./asm/programs/tiny.asm -o ./asm/build/tiny.out -dO -f bBrx
+; ./jcasm ./asm/programs/tiny.asm -o ./asm/build/tiny.out -dO -f bBrx

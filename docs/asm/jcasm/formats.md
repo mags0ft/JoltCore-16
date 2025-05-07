@@ -38,8 +38,7 @@ Below, there is a list of all possible formats and their purpose, along with exa
 Use these options by writing all of those you want behind the `-f` flag for output formats (see [flags](./flags.md)), for example:
 
 ```
-$ ./jcasm ./asm/programs/counter.asm -f bBrx
-$
+./jcasm ./asm/programs/counter.asm -f bBrx
 ```
 
 - **p** (preprocessor output format, no actual executable code):

@@ -49,8 +49,7 @@ Another flag usable if only one format is specified is `--noext`, which will kee
 You can specify the output path for the assembled file(s) using the `-o` or `--output` argument:
 
 ```
-$ jcasm ./asm/programs/counter.asm -o ./asm/build/
-$
+jcasm ./asm/programs/counter.asm -o ./asm/build/
 ```
 
 If this is left unspecified, a file called `bin.out`, plus (if applicable) the respective format file extension, is created in the current working directory.
@@ -60,8 +59,7 @@ If this is left unspecified, a file called `bin.out`, plus (if applicable) the r
 As mentioned on the [respective page](./optimization.md), the JCASM can perform optimizations to your assembly code. To toggle these optimizations on, use the `-O` or `--optimize` flag:
 
 ```
-$ jcasm ./asm/programs/counter.asm -O
-$
+jcasm ./asm/programs/counter.asm -O
 ```
 
 **Important**: While trying to keep the program flow exactly the same, this is still in development and might introduce unexpected behavior. Use the `-d` or `--debug` flag to see if any optimizations are performed that could cause bugs you are encountering.
