@@ -15,7 +15,7 @@ This is a fun little project I did in 2 weeks on vacation, however it has now be
 > adding some optimizations in the context of a school project mentored
 > by _Steve Furber_, co-developer of the original ARM architecture.
 
-This design is going to be thoroughly documented. You can [**read the docs here**](./docs/index.md).
+This design is thoroughly documented. You can [**read the docs here**](./docs/index.md).
 
 The project also features an **own instruction set architecture**. Key features are:
 
