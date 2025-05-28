@@ -58,10 +58,12 @@ private:
             switch (command.opcode)
             {
             case 0b10000:
+                // Jump instruction
                 pc = command.instruction_body;
                 break;
 
             case 0b10001:
+                // Jump if zero instruction
                 if (alu_last_res == 0)
                 {
                     pc = command.instruction_body;
@@ -69,6 +71,7 @@ private:
                 break;
 
             case 0b10010:
+                // Jump if not zero instruction
                 if (alu_last_res != 0)
                 {
                     pc = command.instruction_body;
@@ -76,6 +79,7 @@ private:
                 break;
 
             case 0b10011:
+                // Jump if carry instruction
                 if (alu_had_carry)
                 {
                     pc = command.instruction_body;
@@ -83,6 +87,7 @@ private:
                 break;
 
             case 0b10100:
+                // Jump if no carry instruction
                 if (!alu_had_carry)
                 {
                     pc = command.instruction_body;
@@ -90,18 +95,22 @@ private:
                 break;
 
             case 0b10111:
+                // Emit clock
                 oclk();
                 break;
 
             case 0b11000:
+                // LDI
                 registers[command.target_reg] = command.instruction_body;
                 break;
 
             case 0b11001:
+                // Load from RAM
                 registers[command.target_reg] = ram[command.instruction_body];
                 break;
 
             case 0b11010:
+                // Store in RAM
                 ram[command.instruction_body] = registers[command.target_reg];
                 break;
 
@@ -114,11 +123,13 @@ private:
                 break;
 
             case 0b11111:
+                // Halt instruction
                 Output::print_info("halt instruction invoked");
                 running = false;
                 break;
 
             default:
+                // Anything else
                 Output::print_info("illegal instruction: " + std::to_string(command.opcode));
                 running = false;
                 break;
