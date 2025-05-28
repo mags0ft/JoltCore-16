@@ -6,7 +6,7 @@
     <h1 align="center">JoltCore Spark 16 (JC16)</h1>
 </p>
 
-This is a fun little project I did in 2 weeks on vacation, however it has now been expanded with many more hours invested into it. It is an **extension of my original 8-bit CPU** which is now **16 bits**, has **8 general purpose 16 bit registers**, I/O ports, up to **128KiB RAM and ROM**, basic maths and logical instructions, a fairly mature assembler, basic and performant emulator written in C++ and more.
+This originally was a fun little project I did in 2 weeks on vacation, however it has now been expanded with many more hours invested into it. It is an **evolution of my original 8-bit CPU** which is now **16 bits**, has **8 general purpose 16 bit registers**, I/O ports, up to **128KiB RAM and 192KiB ROM**, basic maths and logical instructions, a fairly mature assembler, basic and performant emulator written in C++ and much more.
 
 > [!IMPORTANT]  
 > The entire CPU is a custom design, from bit shifter to ISA.
@@ -15,7 +15,7 @@ This is a fun little project I did in 2 weeks on vacation, however it has now be
 > adding some optimizations in the context of a school project mentored
 > by _Steve Furber_, co-developer of the original ARM architecture.
 
-This design is going to be thoroughly documented. You can [**read the docs here**](./docs/index.md).
+This design is thoroughly documented. You can [**read the docs here**](./docs/index.md).
 
 The project also features an **own instruction set architecture**. Key features are:
 
@@ -63,7 +63,7 @@ The emulator can be found in `emu`. It is written in C++. As of right now, only 
 ```
 
 > [!NOTE]
-> You need Logisim Evolution to use this project. It is an open source logic simulator available here:
+> You need Logisim Evolution, an open-source logic simulator, to use this project - it's available here:
 > https://github.com/logisim-evolution/logisim-evolution
 
 ---
