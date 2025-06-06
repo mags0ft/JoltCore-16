@@ -63,8 +63,8 @@ The emulator can be found in `emu`. It is written in C++. As of right now, only 
 ```
 
 > [!NOTE]
-> You need Logisim Evolution, an open-source logic simulator, to use this project - it's available here:
-> https://github.com/logisim-evolution/logisim-evolution
+> You'll need Logisim Evolution, an open-source logic simulator, to use this project - it's available for download here:
+> https://github.com/logisim-evolution/logisim-evolution/releases
 
 ---
 
