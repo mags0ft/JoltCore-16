@@ -1,6 +1,6 @@
 ; A simple program that counts to 128, then halts.
 
-define GOAL { #255 }                            ; what goal we want to hit (minus one, because we use "gt", not ">=")
+define GOAL { #128 }                            ; what goal we want to hit (minus one, because we use "gt", not ">=")
 define counting_reg { r0 }                      ; which register to use for counting
 
 define __scratchpad_reg { r7 }                  ; register to use as "scratchpad"

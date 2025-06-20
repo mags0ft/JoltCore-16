@@ -1,6 +1,7 @@
 #pragma once
 
 #include "file_reader.cpp"
+#include "config.cpp"
 #include <cstdint>
 #include <chrono>
 
@@ -9,9 +10,9 @@ class JC16v2CPU
 
 public:
     std::vector<FileReader::Command> rom;
-    unsigned short ram[1 << 16];
+    unsigned short ram[1 << 16] = {0};
 
-    unsigned short registers[8];
+    unsigned short registers[8] = {0};
     unsigned short pc = 0;
 
     unsigned long clock_cycles_passed = 0;
@@ -19,6 +20,8 @@ public:
 
     uint16_t alu_last_res = 0;
     bool alu_had_carry = false;
+
+    const std::string alphabet = "abcdefgh";
 
     void run()
     {
@@ -40,7 +43,21 @@ public:
 
     void oclk()
     {
-        Output::print_info("oclk");
+        Output::print_info(
+            "oclk instruction invoked (" + std::to_string(clock_cycles_passed) + " cycles passed)");
+
+        if (!Config::DUMP_REGS_ON_OCLOCK)
+        {
+            return;
+        }
+
+        // dump registers
+        Output::print_info("registers:");
+        for (int i = 0; i < 8; i++)
+        {
+            Output::print_info(
+                "  r" + std::to_string(i) + "/r" + alphabet[i] + ": " + std::to_string(registers[i]), true);
+        }
     }
 
 private:
@@ -68,6 +85,7 @@ private:
                 {
                     pc = command.instruction_body;
                 }
+
                 break;
 
             case 0b10010:
