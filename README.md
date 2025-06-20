@@ -9,13 +9,13 @@
 This originally was a fun little project I did in 2 weeks on vacation, however it has now been expanded with many more hours invested into it. It is an **evolution of my original 8-bit CPU** which is now **16 bits**, has **8 general purpose 16 bit registers**, I/O ports, up to **128KiB RAM and 192KiB ROM**, basic maths and logical instructions, a fairly mature assembler, basic and performant emulator written in C++ and much more.
 
 > [!IMPORTANT]  
-> The entire CPU is a custom design, from bit shifter to ISA.
+> The entire CPU is a custom design - from bit shifter over wire layout to ISA.
 >
 > **In the winter of 2024 and 2025, it was improved further** by
 > adding some optimizations in the context of a school project mentored
 > by _Steve Furber_, co-developer of the original ARM architecture.
 
-This design is thoroughly documented. You can [**read the docs here**](./docs/index.md).
+This project is thoroughly documented. You can [**read the docs here**](./docs/index.md).
 
 The project also features an **own instruction set architecture**. Key features are:
 
@@ -42,13 +42,13 @@ The assembler tries to make coding as comfortable as possible:
 - it uses a custom assembly language that supports...
     - register notation with either digits (`r0`, `r2`, ...) or letters (`ra`, `rc`, ...)
     - named jumps and code blocks
-    - pre-processor directives such as `define` statements which allow you to use named registers and constants
+    - pre-processor directives such as scoped `define` statements which allow you to use named registers and constants
     - comments
 - detailed errors (with line numbers and descriptions) are thrown once problems are detected
 
 ![Screenshot of a part of the file fibonacci.asm](./docs/images/asm-file-example-screenshot.png)
 
-You can find the assembler in the respective folder, `asm`. It is written in Python. To use an example program, assemble it and copy the entire content of the `.hex` file, then paste it into the ROM inside of Logisim Evolution. The source for these programs is inside of the `asm/programs` folder.
+You can find the assembler in the respective folder, `asm`. It is written in Python. To use an example program, assemble it and copy the entire content of the `.hex` file, then paste it into the ROM inside of Logisim Evolution (or try out the emulator). The source for these programs is inside of the `asm/programs` folder.
 
 A command to assemble into all possible output formats, using debug output and optimizations could look like this:
 
@@ -63,8 +63,8 @@ The emulator can be found in `emu`. It is written in C++. As of right now, only 
 ```
 
 > [!NOTE]
-> You need Logisim Evolution, an open-source logic simulator, to use this project - it's available here:
-> https://github.com/logisim-evolution/logisim-evolution
+> You'll need Logisim Evolution, an open-source logic simulator, to use this project - it's available for download here:
+> https://github.com/logisim-evolution/logisim-evolution/releases
 
 ---
 
