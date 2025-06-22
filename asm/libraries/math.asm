@@ -3,12 +3,13 @@
 
 define mlib_operand_a_reg { ra }
 define mlib_operand_b_reg { rb }
+
 define mlib_res_reg { rc }
 define mlib_remainder_reg { rd }
 
 define __dummy_reg { re }
 
-define __mlib_BIT_LENGTH { #16 }
+define mlib_BIT_LENGTH { #16 }
 
 define mlib_multiply {
     ldi mlib_res_reg!, #0                                               ; init result to zero
