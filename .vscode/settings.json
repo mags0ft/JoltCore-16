@@ -50,5 +50,10 @@
         "chrono": "cpp",
         "ctime": "cpp",
         "ratio": "cpp"
+    },
+    "[jcasm]": {
+        "editor.rulers": [
+            80
+        ]
     }
 }
