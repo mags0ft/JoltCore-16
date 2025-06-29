@@ -1,6 +1,7 @@
-; An extremely barebones program, just to test if the parallelization feature works correctly.
-; It is even more stripped-down than the ./asm/programs/parallelization.asm program to make it
-; easier to understand and verify against the behavior of the CPU.
+; An extremely barebones program, just to test if the parallelization feature
+; works correctly. It is even more stripped-down than the
+; ./asm/programs/parallelization.asm program to make it easier to understand and
+; verify against the behavior of the CPU.
 
 main:
     ; Load the values to work with

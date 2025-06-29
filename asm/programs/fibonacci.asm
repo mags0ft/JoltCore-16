@@ -3,12 +3,13 @@
 ; Enter how many numbers you want to generate:
 define FIB_NUMBERS_TO_CALCULATE { #24 }
 
-; These are the registers we can use. The new assembler supports a primitive kind
-; of preprocessor directives, so we can use named registers to make things simpler.
-define cur_fib_num_reg { r0 }           ; register holding the current number
-define prev_num_1_reg { r1 }            ; register holding the number before
-define prev_num_2_reg { r2 }            ; register holding the number before before
-define numbers_calculated_reg { r3 }    ; register keeping track of the progress
+; These are the registers we can use. The new assembler supports a primitive
+; kind of preprocessor directives, so we can use named registers to make things
+; simpler.
+define cur_fib_num_reg { r0 }        ; register holding the current number
+define prev_num_1_reg { r1 }         ; register holding the number before
+define prev_num_2_reg { r2 }         ; register holding the number before before
+define numbers_calculated_reg { r3 } ; register keeping track of the progress
 
 init:
     ldi cur_fib_num_reg!, #0
@@ -19,11 +20,12 @@ init:
     jmp calc_next_fibonacci_number
 
 calc_next_fibonacci_number:
-    add prev_num_2_reg!, prev_num_1_reg!, #0    ; move the last number into the register
-                                                ; for the second-last number
-    add prev_num_1_reg!, cur_fib_num_reg!, #0   ; same for the current number, which is
-                                                ; is moved into the register for the
-                                                ; last number
+    ; move the last number into the register for the second-last number
+    add prev_num_2_reg!, prev_num_1_reg!, #0
+    
+    ; same for the current number, which is moved into the register for the last
+    ; number
+    add prev_num_1_reg!, cur_fib_num_reg!, #0
 
     ; all preparations are done, calculate the actual fibonacci number now:                                        
     add cur_fib_num_reg!, prev_num_1_reg!, prev_num_2_reg!

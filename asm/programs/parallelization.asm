@@ -1,5 +1,6 @@
 ; This program has been made to test the parallelization feature on the CPU.
-; Instructions inside of the "parallel" block should be executed twice as fast (PC advances by 2).
+; Instructions inside of the "parallel" block should be executed twice as fast
+; (PC advances by 2).
 ; Instructions inside of the "standard" block shouldn't do this in any case.
 
 main:
@@ -9,7 +10,8 @@ main:
     ldi r2, #19
     ldi r3, #24
 
-    ; begin the "parallel" block, which should allow for fast execution because it can run each pair of operations in parallel
+    ; begin the "parallel" block, which should allow for fast execution because
+    ; it can run each pair of operations in parallel
     jmp parallel
 
 parallel:
@@ -19,13 +21,13 @@ parallel:
     nor r2, r1, (lshift r0, r4)
     xor r1, (not r3), r5
 
-    ; and almost the same stuff again, so we can see it better when it's in action:
+    ; almost the same stuff again, so we can see it better when it's in action:
     add r4, r3, r2
     sub r3, r4, r0
     nor r2, r1, (lshift r0, r4)
     xor r1, (not r3), r5
 
-    ; done, now let's try some "unparallelizable" (that's certainly not a real word!) code
+    ; done, now let's try some "unparallelizable" code
     jmp standard
 
 standard:

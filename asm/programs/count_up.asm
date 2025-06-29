@@ -1,4 +1,5 @@
-; This program counts all registers up by 1 for 16 times to test out the parallelization
+; This program counts all registers up by 1 for 16 times to test out the
+; parallelization
 
 main:
     ; initialize all registers

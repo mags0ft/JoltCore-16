@@ -1,4 +1,5 @@
-; This program demonstrates how the scope system works, so you can have more elaborate definitions with jumps in them.
+; This program demonstrates how the scope system works, so you can have more
+; elaborate definitions with jumps in them.
 
 define countdown {
 countdown_scope!:
