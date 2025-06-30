@@ -33,20 +33,20 @@ namespace FileReader
     {
         Command res;
 
-        res.opcode = (instruction & (0b11111 << 19)) >> 19;
+        res.opcode = (instruction & (0x1F << 19)) >> 19;
         res.is_alu = !((bool)(instruction & (1 << 23)));
-        res.target_reg = (instruction & (0b111 << 16)) >> 16;
+        res.target_reg = (instruction & (7 << 16)) >> 16;
 
         if (res.is_alu)
         {
             res.has_encapsulated_op = instruction & (1 << 9);
-            res.alu_body = instruction & 0b11111111;
-            res.flag = (instruction & 0b1100000000) >> 8;
-            res.reg_a = (instruction & (0b111 << 13)) >> 13;
-            res.reg_b = (instruction & (0b111 << 10)) >> 10;
+            res.alu_body = instruction & 0xFF;
+            res.flag = (instruction & 0x300) >> 8;
+            res.reg_a = (instruction & (7 << 13)) >> 13;
+            res.reg_b = (instruction & (7 << 10)) >> 10;
         }
 
-        res.instruction_body = instruction & 0b1111111111111111;
+        res.instruction_body = instruction & 0xFFFF;
 
         return res;
     }
