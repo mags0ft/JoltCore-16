@@ -15,7 +15,7 @@ Below, there is a list of all possible formats and their purpose, along with exa
 11111
 ```
 
-- **B** (block binary format, each instruction has the same length):
+- **B** (block binary format, each instruction has the same length, one instruction per line):
 ```
 000000010110000011110000
 000000100100001100000101
@@ -35,12 +35,12 @@ Below, there is a list of all possible formats and their purpose, along with exa
 160f0 24305 20a05 185 12499 a7030 f80000
 ```
 
-Use these options by writing all of those you want behind the `-f` flag for output formats (see [flags](./flags.md)), for example:
-
-```
-./jcasm ./asm/programs/counter.asm -f bBrx
-```
-
 - **p** (preprocessor output format, no actual executable code):
 
     This option is a little special, as it does not really generate an executable. It is also invoking an export way earlier than the other output formats for the sake of debugging. If something doesn't work as expected and you suspect it's the preprocessor's fault, you can take a look at what is being generated using said option.
+
+Use these options by writing all of those you want behind the `-f` flag for output formats (see [flags](./flags.md)), for example:
+
+```
+./jcasm ./asm/programs/counter.asm -f bBrxp
+```
