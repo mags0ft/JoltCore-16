@@ -1,11 +1,11 @@
 # Includes
 
-If you want to re-use certain areas of code, you can bundle those into files and include their definitions and thus, functionality, from anywhere.
+If you want to re-use certain areas and blocks of code, you can bundle those into files and include their definitions and thus, functionality, from anywhere.
 Using this feature is really simple.
 
 ## Usage
 
-Place an `include` statement anywhere in the code on its own line to import preprocessor definitions from another file - you can use any path notation you like - which doesn't mean you should, of course.
+Place an `include` statement anywhere in the code, each on its own line, to import preprocessor definitions from another file. You can use any path notation you like - which doesn't mean you should, of course.
 
 ```
 include asm/libraries/math.asm              ; best option!
@@ -29,4 +29,4 @@ Note that this statement will only import preprocessor definitions, not any actu
 - A\) require each of the included files not to have any code but only definitions - and thus not be possible to assemble as standalones, or
 - B\) let the files work as standalones, too, but import potentially several `main` code blocks into the file that is including them, causing conflicts.
 
-Thus, the design decision of only importing preprocessor definitions was made.
+Thus, the design decision of only importing preprocessor definitions was made. Including a file will not include any code outside of definitons.
