@@ -1,3 +1,7 @@
+"""
+This module handles the generation of builds in different output formats.
+"""
+
 from typing import Union
 from error_handling import codegen_debug_info, codegen_error
 from spec import AVAILABLE_ROM, INSTRUCTION_LENGTH, OUTPUT_EXTENSIONS
@@ -10,6 +14,10 @@ def generate_build_from_parsed(
     optimize: bool = False,
     debug_info: bool = False,
 ):
+    """
+    Generates a build given a desired output format.
+    """
+
     if debug_info:
         codegen_debug_info(f'generating build for formats "{formats}"')
 
@@ -93,6 +101,10 @@ an internal assembler error)"
 
 
 def blockify(generated):
+    """
+    Formats different-length lines into uniform lengths to create a block of text.
+    """
+
     finalized: str = ""
 
     for line in generated.splitlines():
@@ -103,5 +115,9 @@ def blockify(generated):
 
 
 def write(bin_: "Union[str, bytes]", filename: str, binary: bool = False):
+    """
+    Writes the result to an output file.
+    """
+
     with open(filename, ("wb" if binary else "w")) as f:
         f.write(bin_)
