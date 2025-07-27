@@ -17,7 +17,7 @@ This originally was a fun little project I did in 2 weeks on vacation, however i
 
 This project is thoroughly documented. You can [**read the docs here**](./docs/index.md).
 
-The project also features an **own instruction set architecture**. Key features are:
+The CPU also uses an **own instruction set architecture**. Key features are:
 
 - support for **8-bit immediates in every ALU instruction**:
     ```
@@ -46,7 +46,7 @@ The assembler tries to make coding as comfortable as possible:
     - comments
 - detailed errors (with line numbers and descriptions) are thrown once problems are detected
 
-![Screenshot of a part of the file fibonacci.asm](./docs/images/asm-file-example-screenshot.png)
+![Screenshot of a part of the file fibonacci.asm with syntax highlighting](./docs/images/asm-file-example-screenshot.png)
 
 You can find the assembler in the respective folder, `asm`. It is written in Python. To use an example program, assemble it and copy the entire content of the `.hex` file, then paste it into the ROM inside of Logisim Evolution (or try out the emulator). The source for these programs is inside of the `asm/programs` folder.
 
