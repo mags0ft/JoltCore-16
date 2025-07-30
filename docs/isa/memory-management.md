@@ -6,6 +6,7 @@ As the ISA is designed in a way that forces every instruction to execute in exac
 ## Read data from RAM
 
 Mnemonic: `ldram`
+
 Arguments:
 - destination register (3 bits)
 - static RAM address (can be denoted with a dollar sign for more clarity)
@@ -21,6 +22,7 @@ main:
 ## Store data in RAM
 
 Mnemonic: `stram`
+
 Arguments:
 - source register (3 bits)
 - static RAM address to place the data in
