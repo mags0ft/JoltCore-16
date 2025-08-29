@@ -6,7 +6,7 @@
     <h1 align="center">JoltCore Spark 16 (JC16)</h1>
 </p>
 
-This (originally) was a fun little project I did in 2 weeks on vacation out of boredom, however it has now been expanded with many more hours invested into it. The JoltCore 16 (JC16v2) is an **evolution of my original 8-bit CPU** + it's **16-bit**, now, has **8 general purpose registers**, several I/O ports, up to **128 KiB RAM and 192 KiB ROM**, basic maths and logical instructions, a fairly mature assembler, basic yet performant emulator written in C++ and much more.
+This (originally) was a fun little project I did in 2 weeks on vacation out of boredom, however it has now been expanded with many more hours invested into it. The JoltCore 16 (JC16v2) is an **evolution of my original 8-bit CPU**: it's **16-bit**, now, has **8 general purpose registers**, several I/O ports, up to **128 KiB RAM and 192 KiB ROM**, basic maths and logical instructions, a fairly mature assembler, basic yet performant emulator written in C++ and much more.
 
 > [!IMPORTANT]  
 > The entire CPU is a custom design - from bit shifter over wire layout to ISA.
@@ -15,7 +15,7 @@ This (originally) was a fun little project I did in 2 weeks on vacation out of b
 > adding some optimizations in the context of a school project mentored
 > by _Steve Furber_, co-developer of the original ARM architecture.
 
-This project is thoroughly documented. You can [**read the docs here**](./docs/index.md).
+This project is thoroughly documented. You can [**read the docs here**](./docs/index.md), which includes everything from CPU design choices to guides about the assembly syntax.
 
 The CPU also uses an **own instruction set architecture**. Key features are:
 
@@ -68,4 +68,4 @@ The emulator can be found in `emu`. It is written in C++. As of right now, only 
 
 ---
 
-**Have fun with it!**
+**Have fun with it!** Feel free to fiddle around and don't hesitate to open an issue if anything is unclear.
