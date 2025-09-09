@@ -34,7 +34,7 @@ namespace FileReader
         Command res;
 
         res.opcode = (instruction & (0x1F << 19)) >> 19;
-        res.is_alu = !((bool)(instruction & (1 << 23)));
+        res.is_alu = !(bool)(instruction & (1 << 23));
         res.target_reg = (instruction & (7 << 16)) >> 16;
 
         if (res.is_alu)
