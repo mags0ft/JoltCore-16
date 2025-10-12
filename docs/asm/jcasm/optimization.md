@@ -5,6 +5,8 @@ The assembler performs some simple optimization. Besides merely **avoiding rooki
 - replacing comments with `nop`s instead of excluding them from the build
 - inserting separate instructions for jump labels instead of just jumping to the next instruction below the label
 
+... some slightly more advanced, though experimental optimization is performed.
+
 Currently, optimization is still very limited and experimental. Only use it if you are sure this won't critically affect your program flow, because there may still be problems.
 
 ## Redundant operation elimination

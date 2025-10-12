@@ -6,9 +6,12 @@ As the ISA is designed in a way that forces every instruction to execute in exac
 ## Read data from RAM
 
 Mnemonic: `ldram`
+
 Arguments:
 - destination register (3 bits)
 - static RAM address (can be denoted with a dollar sign for more clarity)
+
+This instruction will load one word (2 bytes) from the according memory cell.
 
 Example code to read data from RAM cell 0 to register 0:
 
@@ -21,9 +24,12 @@ main:
 ## Store data in RAM
 
 Mnemonic: `stram`
+
 Arguments:
 - source register (3 bits)
 - static RAM address to place the data in
+
+This instruction will write one word (2 bytes) to the according memory cell.
 
 Example code to write data to RAM cell 0 from register 0:
 

@@ -35,7 +35,7 @@ As discussed on the [output format page](./formats.md), the JCASM supports expor
 The currently available ones are:
 
 - `b`: standard binary-like text format - space-separated blocks, newlines for each instruction
-- `B`: binary-like text format without spaces for segmentation
+- `B`: binary-like text format without spaces for segmentation, instructions are still separated with newlines for clarity
 - `r`: raw ROM format - exports into pure, machine-readable, binary ROM files
 - `x`: hexadecimal output, each instruction being separated by spaces
 - `p`: exports the result of the pre-processor, which is what is being fed into the rest of the assembler

@@ -11,3 +11,11 @@ define scrlib_write_to_screen {
     wrpin scrlib_char!, srclib_screen_char_port!
     oclk
 }
+
+define scrlib_clear_pixel {
+    ; Definition to clear a pixel on the screen.
+    ; Invokes scrlib_write_to_screen at assembly time. Uses r4 and r5.
+
+    ldi scrlib_char!, #0
+    scrlib_write_to_screen!
+}

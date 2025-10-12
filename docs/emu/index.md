@@ -26,3 +26,13 @@ jcemu: version v0.0.1
 jcemu: halt instruction invoked
 jcemu: program execution terminated, took 1058 clock cycle(s) and 0.017783ms (avg clock speed 59.5 MHz)
 ```
+
+## Tips and tricks
+
+JCEMU allows you to change the program behavior by editing `constants.cpp` and re-building the software. For example, you may want to make sure to set
+
+```cpp
+constant bool DUMP_REGS_ON_OCLOCK = true;
+```
+
+in order to use the `oclk` command in your assembly programs for debugging purposes.

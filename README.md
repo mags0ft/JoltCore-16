@@ -6,7 +6,7 @@
     <h1 align="center">JoltCore Spark 16 (JC16)</h1>
 </p>
 
-This originally was a fun little project I did in 2 weeks on vacation, however it has now been expanded with many more hours invested into it. It is an **evolution of my original 8-bit CPU** which is now **16 bits**, has **8 general purpose 16 bit registers**, I/O ports, up to **128KiB RAM and 192KiB ROM**, basic maths and logical instructions, a fairly mature assembler, basic and performant emulator written in C++ and much more.
+This (originally) was a fun little project I did in 2 weeks on vacation out of boredom, however it has now been expanded with many more hours invested into it. The JoltCore 16 (JC16v2) is an **evolution of my original 8-bit CPU**: it's **16-bit**, now, has **8 general purpose registers**, several I/O ports, up to **128 KiB RAM and 192 KiB ROM**, basic maths and logical instructions, a fairly mature assembler, basic yet performant emulator written in C++ and much more.
 
 > [!IMPORTANT]  
 > The entire CPU is a custom design - from bit shifter over wire layout to ISA.
@@ -15,9 +15,9 @@ This originally was a fun little project I did in 2 weeks on vacation, however i
 > adding some optimizations in the context of a school project mentored
 > by _Steve Furber_, co-developer of the original ARM architecture.
 
-This project is thoroughly documented. You can [**read the docs here**](./docs/index.md).
+This project is thoroughly documented. You can [**read the docs here**](./docs/index.md), which includes everything from CPU design choices to guides about the assembly syntax.
 
-The project also features an **own instruction set architecture**. Key features are:
+The CPU also uses an **own instruction set architecture**. Key features are:
 
 - support for **8-bit immediates in every ALU instruction**:
     ```
@@ -46,7 +46,7 @@ The assembler tries to make coding as comfortable as possible:
     - comments
 - detailed errors (with line numbers and descriptions) are thrown once problems are detected
 
-![Screenshot of a part of the file fibonacci.asm](./docs/images/asm-file-example-screenshot.png)
+![Screenshot of a part of the file fibonacci.asm with syntax highlighting](./docs/images/asm-file-example-screenshot.png)
 
 You can find the assembler in the respective folder, `asm`. It is written in Python. To use an example program, assemble it and copy the entire content of the `.hex` file, then paste it into the ROM inside of Logisim Evolution (or try out the emulator). The source for these programs is inside of the `asm/programs` folder.
 
@@ -68,4 +68,4 @@ The emulator can be found in `emu`. It is written in C++. As of right now, only 
 
 ---
 
-**Have fun with it!**
+**Have fun with it!** Feel free to fiddle around and don't hesitate to open an issue if anything is unclear.
