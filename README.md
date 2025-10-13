@@ -1,6 +1,6 @@
 <p align="center">
     <img 
-        style="width: 75%;"
+        width=480
         src="./docs/images/promo-picture.webp" 
         alt="An imagination of the CPU rendered in Blender">
     <h1 align="center">JoltCore Spark 16 (JC16)</h1>
