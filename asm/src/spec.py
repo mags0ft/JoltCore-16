@@ -1,3 +1,8 @@
+"""
+General specifications for the Spark 16 assembly language and CPU that allows
+the assembler and other tools to share common constants and settings.
+"""
+
 # The number of general purpose registers available on the CPU
 REGISTERS_AVAILABLE = 8
 
@@ -23,4 +28,10 @@ INSTRUCTION_LENGTH = 24
 # maximum ROM the CPU can use
 AVAILABLE_ROM = MAX_INT * (INSTRUCTION_LENGTH // 8)
 
-OUTPUT_EXTENSIONS = {"b": "bin", "B": "bbin", "x": "hex", "r": "rom", "p": "asm"}
+OUTPUT_EXTENSIONS = {
+    "b": "bin",
+    "B": "bbin",
+    "x": "hex",
+    "r": "rom",
+    "p": "asm",
+}

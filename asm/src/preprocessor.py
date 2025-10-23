@@ -1,3 +1,9 @@
+"""
+Preprocessor module for JCASM; handles preprocessing directives such as
+includes and definitions to allow for more complex assembly source code with
+higher levels of abstraction.
+"""
+
 import string
 from uuid import uuid4
 from bin_generator import write
@@ -8,6 +14,10 @@ INCLUDE_KEYWORD: str = "include "
 
 
 def remove_comment_from_line(line: str) -> str:
+    """
+    Removes comments from a single line of code.
+    """
+
     if line.strip().startswith(";"):
         return ""
 
@@ -28,7 +38,13 @@ def comment_out_lines(text: str, lines: set) -> str:
     )
 
 
-def run_preprocessing_passes(text: str, debug_info: bool, file: str, args=None):
+def run_preprocessing_passes(
+    text: str, debug_info: bool, file: str, args=None
+):
+    """
+    Runs the preprocessing passes on the given text.
+    """
+
     definitions = parse_directives(text, debug_info, file)
 
     if debug_info:
@@ -80,6 +96,11 @@ def run_preprocessing_passes(text: str, debug_info: bool, file: str, args=None):
 
 
 def find_preprocessor_directive_lines(text):
+    """
+    Finds all lines that contain preprocessor directives and returns their
+    line numbers as a set.
+    """
+
     lines: "set[int]" = set()
     line: int = 0
 
@@ -114,6 +135,11 @@ def find_preprocessor_directive_lines(text):
 
 
 def parse_directives(text: str, debug_info: bool, file: str):
+    """
+    Parses the preprocessing directives in the given text and returns a
+    dictionary mapping definition names to their contents.
+    """
+
     definitions: "dict[str, str]" = {}
 
     line: int = 1
@@ -196,7 +222,10 @@ def parse_directives(text: str, debug_info: bool, file: str):
                     )
 
                 if any(
-                    [i not in ALLOWED_DEFINITION_NAMES for i in cur_definition_name]
+                    [
+                        i not in ALLOWED_DEFINITION_NAMES
+                        for i in cur_definition_name
+                    ]
                 ):
                     preprocess_error(
                         f'definitions should only use these characters as names: "{ALLOWED_DEFINITION_NAMES}"',

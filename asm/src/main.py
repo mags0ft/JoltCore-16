@@ -1,5 +1,10 @@
 #!/usr/bin/python3
 
+"""
+The main module for JCASM; handles argument parsing and controls the general
+flow of the assembler.
+"""
+
 from error_handling import debug_info, optimize_debug_info, error
 from bin_generator import generate_build_from_parsed, write
 from parser import build_instructions
@@ -8,7 +13,9 @@ from spec import OUTPUT_EXTENSIONS
 
 from argparse import ArgumentParser
 
-p = ArgumentParser(prog="jcasm", description="Assembler targeting the JoltCore 16 CPU.")
+p = ArgumentParser(
+    prog="jcasm", description="Assembler targeting the JoltCore 16 CPU."
+)
 p.add_argument("input_file")
 p.add_argument(
     "-o",
@@ -42,6 +49,12 @@ p.add_argument(
 
 
 def main():
+    """
+    The main entry point for JCASM; parses arguments, builds instructions,
+    generates binaries, and writes them to disk. Controls the general flow of
+    the assembler.
+    """
+
     args = p.parse_args()
 
     for char in args.format:
@@ -72,7 +85,11 @@ def main():
     for build, extension, binary in generate_build_from_parsed(
         parsed, args.format, args.optimize, args.debug
     ):
-        write(build, output_file + (f".{extension}" if not args.noext else ""), binary)
+        write(
+            build,
+            output_file + (f".{extension}" if not args.noext else ""),
+            binary,
+        )
 
 
 if __name__ == "__main__":

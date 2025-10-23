@@ -1,16 +1,27 @@
+"""
+The parser module; responsible for parsing assembly source code into
+intermediate instruction representations.
+"""
+
 from dataclasses import dataclass
 import os
 from string import ascii_lowercase
 
 from preprocessor import remove_comment_from_line, run_preprocessing_passes
-from spec import INLINE_IMMEDIATE_BIT_COUNT, MAX_INLINE_IMMEDIATE, REGISTERS_AVAILABLE
+from spec import (
+    INLINE_IMMEDIATE_BIT_COUNT,
+    MAX_INLINE_IMMEDIATE,
+    REGISTERS_AVAILABLE,
+)
 from commands import COMMANDS, Argument, Instruction
 from error_handling import parse_error
 
 
 @dataclass
 class LineOfCode:
-    # represents a line of original source code.
+    """
+    Represents an original, individual line of code from the source file.
+    """
 
     content: str = ""
     original_line: int = 0
@@ -22,8 +33,15 @@ class LineOfCode:
 
 
 def build_instructions(
-    input_file: str, optimize: bool = False, debug_info: bool = False, args=None
+    input_file: str,
+    optimize: bool = False,
+    debug_info: bool = False,
+    args=None,
 ):
+    """
+    Builds a list of instructions from the given input file.
+    """
+
     if not os.path.isfile(input_file):
         parse_error(f'cannot open file "{input_file}".')
 
@@ -36,7 +54,11 @@ def build_instructions(
 
 
 def preprocess(s: str) -> "list[LineOfCode]":
-    # does some preprocessing, most notably moves the main function up.
+    """
+    Does some preprocessing, most notably moves the main function up. Not to be
+    confused with the preprocessing passes done in preprocessor.py, which are
+    more complex and handle things like includes and macros.
+    """
 
     res: "list[LineOfCode]" = []
 
@@ -51,7 +73,9 @@ def preprocess(s: str) -> "list[LineOfCode]":
         processed_line = remove_comment_from_line(line)
 
         if (not processed_line.endswith(":")) and (not cur_in):
-            parse_error("code outside of named block", {"line": line_number + 1})
+            parse_error(
+                "code outside of named block", {"line": line_number + 1}
+            )
 
         if processed_line.endswith(":"):
             cur_in = processed_line[:-1]
@@ -77,6 +101,10 @@ def preprocess(s: str) -> "list[LineOfCode]":
 def parse_file(
     s: str, optimize: bool = False, debug_info: bool = False
 ) -> "list[Instruction]":
+    """
+    Parses the given source code string into a list of instructions.
+    """
+
     res = []
 
     lines: "list[LineOfCode]" = preprocess(s)
@@ -112,11 +140,17 @@ def parse_file(
 
 
 def parse_line(l: LineOfCode, block_names: "dict[str, int]") -> Instruction:
+    """
+    Parses a single line of code into an Instruction object.
+    """
+
     split_content: "list[str]" = l.content.split()
 
     opcode: str = split_content[0]
     if opcode not in COMMANDS:
-        parse_error("unknown command", {"command": opcode, "line": l.original_line + 1})
+        parse_error(
+            "unknown command", {"command": opcode, "line": l.original_line + 1}
+        )
 
     instr: Instruction = COMMANDS[opcode]()
     instr.debug_line = l.original_line
