@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project source="3.9.0" version="1.0">
-  This file is intended to be loaded by Logisim-evolution v3.9.0(https://github.com/logisim-evolution/).
+<project source="4.0.0" version="1.0">
+  This file is intended to be loaded by Logisim-evolution v4.0.0(https://github.com/logisim-evolution/).
 
   <lib desc="#Wiring" name="0">
     <tool name="Pin">
@@ -38,7 +38,7 @@
     <tool lib="0" name="Pin"/>
     <tool lib="0" name="Pin">
       <a name="facing" val="west"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </tool>
     <sep/>
     <tool lib="1" name="NOT Gate"/>
@@ -71,6 +71,7 @@
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(880,590)" name="Clock">
+      <a name="appearance" val="classic"/>
       <a name="label" val="CLK"/>
     </comp>
     <comp lib="0" loc="(910,550)" name="Constant">
@@ -92,11 +93,8 @@
       <a name="addrWidth" val="16"/>
       <a name="appearance" val="classic"/>
       <a name="contents">addr/data: 16 24
-c50000 c40048 e58000 b80000 c40065 e58000 b80000 c4006c
-e58000 b80000 c4006c e58000 b80000 c4006f e58000 b80000
-c40020 e58000 b80000 c40077 e58000 b80000 c4006f e58000
-b80000 c40072 e58000 b80000 c4006c e58000 b80000 c40064
-e58000 b80000 f80000
+c70020 c00006 c10013 c20000 132301 880007 240f0 400301
+492301 900004 fe301 900001 f80000
 </a>
       <a name="dataWidth" val="24"/>
     </comp>
@@ -104,18 +102,8 @@ e58000 b80000 f80000
       <a name="addrWidth" val="16"/>
       <a name="appearance" val="classic"/>
       <a name="contents">addr/data: 16 24
-c50000 c60001 c40048 e58000 d44000 c40001 e4c000 c40000
-e4c000 cc4000 c40065 e58000 d44000 c40001 e4c000 c40000
-e4c000 cc4000 c4006c e58000 d44000 c40001 e4c000 c40000
-e4c000 cc4000 c4006c e58000 d44000 c40001 e4c000 c40000
-e4c000 cc4000 c4006f e58000 d44000 c40001 e4c000 c40000
-e4c000 cc4000 c40020 e58000 d44000 c40001 e4c000 c40000
-e4c000 cc4000 c40077 e58000 d44000 c40001 e4c000 c40000
-e4c000 cc4000 c4006f e58000 d44000 c40001 e4c000 c40000
-e4c000 cc4000 c40072 e58000 d44000 c40001 e4c000 c40000
-e4c000 cc4000 c4006c e58000 d44000 c40001 e4c000 c40000
-e4c000 cc4000 c40064 e58000 d44000 c40001 e4c000 c40000
-e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
+c70020 c00006 c10013 c20000 132301 880007 240f0 400301
+492301 900004 fe301 900001 f80000
 </a>
       <a name="dataWidth" val="24"/>
     </comp>
@@ -192,13 +180,13 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="Sum"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(950,510)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="CarryOut"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="1" loc="(710,470)" name="XOR Gate"/>
     <comp lib="1" loc="(770,600)" name="AND Gate"/>
@@ -271,7 +259,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="CarryOut"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(880,440)" name="Splitter">
       <a name="facing" val="west"/>
@@ -283,7 +271,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp loc="(810,1050)" name="JCS1_FullAdder"/>
@@ -529,13 +517,13 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="Diff"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(830,710)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="BorrowOut"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="1" loc="(580,660)" name="XOR Gate"/>
     <comp lib="1" loc="(600,730)" name="NOT Gate"/>
@@ -607,7 +595,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="CarryOut"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(880,440)" name="Splitter">
       <a name="facing" val="west"/>
@@ -619,7 +607,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp loc="(810,1050)" name="JCS1_FullSubtractor"/>
@@ -1394,14 +1382,14 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(990,820)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="Carry"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="1" loc="(990,820)" name="OR Gate">
       <a name="size" val="30"/>
@@ -1571,7 +1559,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="8"/>
     </comp>
     <comp lib="0" loc="(580,590)" name="Splitter">
@@ -1667,7 +1655,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R0"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(890,610)" name="Splitter">
@@ -1718,7 +1706,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="1" loc="(730,680)" name="AND Gate">
@@ -1744,7 +1732,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="1" loc="(730,680)" name="OR Gate">
@@ -1765,7 +1753,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="1" loc="(730,680)" name="NOT Gate">
@@ -1791,7 +1779,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="1" loc="(740,680)" name="XOR Gate">
@@ -1817,7 +1805,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="1" loc="(740,680)" name="NAND Gate">
@@ -1843,7 +1831,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="1" loc="(740,680)" name="NOR Gate">
@@ -1867,7 +1855,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="Q"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="1" loc="(420,220)" name="NOR Gate"/>
     <comp lib="1" loc="(420,310)" name="NOR Gate"/>
@@ -1906,7 +1894,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
     <comp lib="0" loc="(720,270)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="1" loc="(370,280)" name="NOT Gate"/>
     <comp lib="1" loc="(400,240)" name="AND Gate">
@@ -1966,7 +1954,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
     <comp lib="0" loc="(670,250)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="8"/>
     </comp>
     <comp lib="0" loc="(670,250)" name="Splitter">
@@ -2098,7 +2086,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="PR"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="2" loc="(360,830)" name="Multiplexer">
@@ -2141,64 +2129,64 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="INSTR_ADDR"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(1050,1080)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="IS_OCLK"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(1050,1130)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="IS_HALT"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(1050,1170)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="IS_LDRAM"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(1050,1200)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="IS_STRAM"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(1050,1240)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="RAM_ADDR"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(1050,1300)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="IS_RDPIN"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(1050,1350)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="IS_WRPIN"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(1050,1420)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="PIN_ID_REG"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="3"/>
     </comp>
     <comp lib="0" loc="(1050,410)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="REG_DEST"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="3"/>
     </comp>
     <comp lib="0" loc="(1050,410)" name="Splitter">
@@ -2210,71 +2198,71 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="IS_ALU"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(1050,500)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="ALU_REG_A"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="3"/>
     </comp>
     <comp lib="0" loc="(1050,560)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="ALU_REG_B"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="3"/>
     </comp>
     <comp lib="0" loc="(1050,620)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="ALU_INSTR"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(1050,700)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="IS_LDI"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(1050,750)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="LDI_VALUE"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(1050,840)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="IS_JMP"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(1050,870)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="IS_JIZ"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(1050,900)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="IS_JNZ"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(1050,930)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="IS_JIC"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(1050,960)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="IS_JNC"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(1060,1490)" name="Constant">
       <a name="value" val="0x0"/>
@@ -2288,14 +2276,14 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="ALU_INSTR_BODY"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="8"/>
     </comp>
     <comp lib="0" loc="(1080,1540)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="ALU_FLAG"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="2"/>
     </comp>
     <comp lib="0" loc="(220,380)" name="Pin">
@@ -2764,7 +2752,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R0"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="0" loc="(890,610)" name="Splitter">
@@ -2821,7 +2809,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(1120,310)" name="Splitter">
@@ -3140,20 +3128,20 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="Bit"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(1040,510)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="NextShiftBy"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(1110,540)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="WasCarry"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(800,510)" name="Pin">
       <a name="appearance" val="classic"/>
@@ -3237,7 +3225,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="CarryOut"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(880,1640)" name="Splitter">
       <a name="facing" val="west"/>
@@ -3249,7 +3237,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="4"/>
     </comp>
     <comp loc="(810,1650)" name="JCS1_FullAdder"/>
@@ -3310,19 +3298,19 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="Bit"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(1110,540)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="WasCarry"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(1120,510)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="NextShiftBy"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(790,530)" name="Pin">
@@ -3421,7 +3409,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="CarryOut"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(880,1640)" name="Splitter">
       <a name="facing" val="west"/>
@@ -3433,7 +3421,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="4"/>
     </comp>
     <comp loc="(810,1650)" name="JCS1_FullSubtractor"/>
@@ -3500,7 +3488,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(550,550)" name="Pin">
@@ -3824,7 +3812,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(640,950)" name="Splitter">
@@ -3894,7 +3882,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="1" loc="(800,740)" name="OR Gate">
@@ -3986,7 +3974,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(930,820)" name="Splitter">
@@ -4217,13 +4205,13 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(800,830)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="GoDeeper"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="1" loc="(560,810)" name="NOT Gate"/>
     <comp lib="1" loc="(610,790)" name="AND Gate">
@@ -4286,7 +4274,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(780,620)" name="Splitter">
@@ -4510,13 +4498,13 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="OCLK"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(1360,850)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="STRAM"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(1360,890)" name="Tunnel">
       <a name="label" val="pin_id_reg"/>
@@ -4534,13 +4522,10 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="LDRAM"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(1410,950)" name="Tunnel">
       <a name="label" val="IS_PARALLEL"/>
-    </comp>
-    <comp lib="0" loc="(1410,980)" name="Constant">
-      <a name="value" val="0x0"/>
     </comp>
     <comp lib="0" loc="(1420,1470)" name="Splitter">
       <a name="facing" val="north"/>
@@ -4557,7 +4542,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="RUN_CLK"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(1520,1080)" name="Tunnel">
       <a name="facing" val="east"/>
@@ -4585,7 +4570,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="RAM_ADDR"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(1650,1050)" name="Pin">
@@ -4619,28 +4604,28 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="O_PIN0"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(1760,1580)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="O_PIN1"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(1760,1680)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="O_PIN2"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(1760,1780)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="O_PIN3"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(1770,1230)" name="Tunnel">
@@ -4656,7 +4641,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="RAM_VAL_ST"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(1860,1300)" name="Tunnel">
@@ -4767,7 +4752,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="ROM_ADDR"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(940,990)" name="Tunnel">
@@ -5195,7 +5180,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="3"/>
     </comp>
     <comp lib="0" loc="(580,790)" name="Splitter">
@@ -5247,7 +5232,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(580,750)" name="Splitter">
@@ -5290,56 +5275,56 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R1"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(1030,1200)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R2"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(1030,1330)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R3"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(1030,1460)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R4"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(1030,1590)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R5"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(1030,1710)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R6"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(1030,1840)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R7"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(1030,960)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R0"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(680,1180)" name="Pin">
@@ -5844,7 +5829,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="8"/>
     </comp>
   </circuit>
@@ -5947,14 +5932,14 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="O_A"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(1780,1140)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="O_B"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="1" loc="(1580,1500)" name="NOT Gate">
@@ -6182,7 +6167,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="R"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(900,910)" name="Splitter">
@@ -6251,7 +6236,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="CAN_RUN_PARALLEL"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(990,1000)" name="Splitter">
       <a name="fanout" val="3"/>
@@ -6369,7 +6354,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="IS_EQUAL"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="1" loc="(1140,870)" name="XOR Gate">
       <a name="width" val="3"/>
@@ -6399,12 +6384,12 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="IS_ALU"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
     </comp>
     <comp lib="0" loc="(790,920)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="label" val="ALU_F"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(790,920)" name="Splitter">
@@ -6415,7 +6400,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
     <comp lib="0" loc="(820,920)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="label" val="TARGET_REG"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="3"/>
     </comp>
     <comp lib="0" loc="(820,920)" name="Splitter">
@@ -6426,7 +6411,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
     <comp lib="0" loc="(850,920)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="label" val="REG_A"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="3"/>
     </comp>
     <comp lib="0" loc="(850,920)" name="Splitter">
@@ -6437,7 +6422,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
     <comp lib="0" loc="(880,920)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="label" val="REG_B"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="3"/>
     </comp>
     <comp lib="0" loc="(880,920)" name="Splitter">
@@ -6448,7 +6433,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
     <comp lib="0" loc="(900,920)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="label" val="FLAG"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="2"/>
     </comp>
     <comp lib="0" loc="(900,920)" name="Splitter">
@@ -6457,7 +6442,7 @@ e4c000 cc4000 f80000 c40000 e68000 cc4000 f80000
     <comp lib="0" loc="(980,920)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="label" val="ALU_BODY"/>
-      <a name="output" val="true"/>
+      <a name="type" val="output"/>
       <a name="width" val="8"/>
     </comp>
     <comp lib="0" loc="(980,920)" name="Splitter">

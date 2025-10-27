@@ -266,7 +266,7 @@ def parse_line(l: LineOfCode, block_names: "dict[str, int]") -> Instruction:
                 except ValueError:
                     immediate_value = ord(arg[-1])
 
-                if immediate_value > MAX_INLINE_IMMEDIATE:
+                if immediate_value > MAX_INLINE_IMMEDIATE and opcode != "ldi":
                     parse_error(
                         f"inline immediates are limited to {INLINE_IMMEDIATE_BIT_COUNT} bits, so they cannot exceed {MAX_INLINE_IMMEDIATE}.",
                         {"line": l.original_line},
