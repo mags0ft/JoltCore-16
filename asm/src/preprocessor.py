@@ -30,6 +30,11 @@ def remove_comment_from_line(line: str) -> str:
 
 
 def comment_out_lines(text: str, lines: set) -> str:
+    """
+    Comments out the specified lines in the given text (adds ";" at the start
+    of each line).
+    """
+
     return "\n".join(
         [
             ("; " if line_idx + 1 in lines else "") + line_content
