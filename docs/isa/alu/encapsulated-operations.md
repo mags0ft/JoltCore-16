@@ -3,6 +3,8 @@
 The ALU supports so-called encapsulated operations for all ALU functions. They can help increase IPC/throughput dramatically if used correctly.
 Two-step formulas can be calculated all within one clock cycle. Together with parallelization, they can result in a total of 4x the "unoptimized" performance.
 
+![Encapsulated operation bit-level explanation figure](../../images/alu-instruction-explanation.png)
+
 ## Usage
 
 In JC16 assembly (assembled by the JCASM), it is trivial to use these encapsulated operations by denoting them inside of parenthesis. You do not specify any target register, as there is none - the result is directly piped into the parent ALU instruction.
