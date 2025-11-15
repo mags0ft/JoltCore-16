@@ -10,6 +10,9 @@ from bin_generator import write
 from error_handling import preprocess_debug_info, preprocess_error
 
 ALLOWED_DEFINITION_NAMES: str = string.ascii_letters + string.digits + "_"
+
+# we include the space to avoid partial matches and ensure that "include"
+# directives are correctly identified
 INCLUDE_KEYWORD: str = "include "
 
 
@@ -45,7 +48,7 @@ def comment_out_lines(text: str, lines: set) -> str:
 
 def run_preprocessing_passes(
     text: str, debug_info: bool, file: str, args=None
-):
+) -> str:
     """
     Runs the preprocessing passes on the given text.
     """
@@ -84,7 +87,8 @@ def run_preprocessing_passes(
         if passes > 1024:
             t = [i.strip() for i in remove_preprocessed_lines().split()]
             preprocess_error(
-                "undefined definition or circular reference detected in pre-processing definitions"
+                "undefined definition or circular reference detected in pre-\
+processing definitions"
                 "\n    affected definitions: \n\t- "
                 + "\n\t- ".join(filter(lambda s: s.endswith("!"), t))
             )
@@ -100,7 +104,7 @@ def run_preprocessing_passes(
     return text
 
 
-def find_preprocessor_directive_lines(text):
+def find_preprocessor_directive_lines(text) -> "set[int]":
     """
     Finds all lines that contain preprocessor directives and returns their
     line numbers as a set.
@@ -139,7 +143,9 @@ def find_preprocessor_directive_lines(text):
     return lines
 
 
-def parse_directives(text: str, debug_info: bool, file: str):
+def parse_directives(
+    text: str, debug_info: bool, file: str
+) -> "dict[str, str]":
     """
     Parses the preprocessing directives in the given text and returns a
     dictionary mapping definition names to their contents.
@@ -233,7 +239,8 @@ def parse_directives(text: str, debug_info: bool, file: str):
                     ]
                 ):
                     preprocess_error(
-                        f'definitions should only use these characters as names: "{ALLOWED_DEFINITION_NAMES}"',
+                        f'definitions should only use these characters as \
+names: "{ALLOWED_DEFINITION_NAMES}"',
                         {
                             "line": line,
                             "col": col,
@@ -247,9 +254,11 @@ def parse_directives(text: str, debug_info: bool, file: str):
                 cur_definition_content = ""
                 cur_definition_name = ""
                 cur = ""
+
                 continue
 
             cur_definition_content += char
+
             continue
 
         else:
