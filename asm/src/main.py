@@ -13,40 +13,6 @@ from spec import OUTPUT_EXTENSIONS
 
 from argparse import ArgumentParser
 
-p = ArgumentParser(
-    prog="jcasm", description="Assembler targeting the JoltCore 16 CPU."
-)
-p.add_argument("input_file")
-p.add_argument(
-    "-o",
-    "--output",
-    default="./bin.out",
-    help="The output file to write the resulting binary to.",
-)
-p.add_argument(
-    "-O",
-    "--optimize",
-    action="store_true",
-    help="Whether to turn on basic optimizations.",
-)
-p.add_argument(
-    "-f",
-    "--format",
-    help=f"Which format(s) to use when exporting (possible: {', '.join(OUTPUT_EXTENSIONS.keys())})",
-    default="brx",
-)
-p.add_argument(
-    "-d",
-    "--debug",
-    action="store_true",
-    help="Whether to generate debug information while compiling.",
-)
-p.add_argument(
-    "--noext",
-    action="store_true",
-    help="Whether to leave out the format-specific extension (only works when building for one format)",
-)
-
 
 def main():
     """
@@ -54,6 +20,40 @@ def main():
     generates binaries, and writes them to disk. Controls the general flow of
     the assembler.
     """
+
+    p = ArgumentParser(
+        prog="jcasm", description="Assembler targeting the JoltCore 16 CPU."
+    )
+    p.add_argument("input_file")
+    p.add_argument(
+        "-o",
+        "--output",
+        default="./bin.out",
+        help="The output file to write the resulting binary to.",
+    )
+    p.add_argument(
+        "-O",
+        "--optimize",
+        action="store_true",
+        help="Whether to turn on basic optimizations.",
+    )
+    p.add_argument(
+        "-f",
+        "--format",
+        help=f"Which format(s) to use when exporting (possible: {', '.join(OUTPUT_EXTENSIONS.keys())})",
+        default="brx",
+    )
+    p.add_argument(
+        "-d",
+        "--debug",
+        action="store_true",
+        help="Whether to generate debug information while compiling.",
+    )
+    p.add_argument(
+        "--noext",
+        action="store_true",
+        help="Whether to leave out the format-specific extension (only works when building for one format)",
+    )
 
     args = p.parse_args()
 
