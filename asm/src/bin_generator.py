@@ -58,6 +58,12 @@ an internal assembler error)"
                 1  # our instructions will now all be up by one address in ROM!
             )
 
+    if instr_used > AVAILABLE_ROM:
+        codegen_error(
+            f"generated build exceeds available ROM size ({instr_used} \
+instructions used, but only {AVAILABLE_ROM} available)"
+        )
+
     if debug_info:
         codegen_debug_info(
             f"""compilation succeeded!
@@ -109,7 +115,9 @@ def blockify(generated):
 
     for line in generated.splitlines():
         processed = line.replace(" ", "")
-        finalized += processed + ("0" * (INSTRUCTION_LENGTH - len(processed))) + "\n"
+        finalized += (
+            processed + ("0" * (INSTRUCTION_LENGTH - len(processed))) + "\n"
+        )
 
     return finalized.strip()
 
