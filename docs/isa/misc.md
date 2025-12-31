@@ -35,7 +35,7 @@ main:
 
 ## nop
 
-Technically, this is executed in the ALU. It will not perform any operation to the input value(s) at all. However, it still supports encapsulated operations which themselves are capable of doing something. You can use this command to move data around and modify it in the same time.
+Technically, this instruction is executed in the ALU. It will not perform any operation to the input value(s) at all. However, it still supports encapsulated operations which themselves are capable of doing something. You can use this command to move data around and modify it at the same time.
 
 Specifically, it will take operand A, write it into the target register and discard operand B.
 
