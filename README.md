@@ -6,9 +6,9 @@
     <h1 align="center">JoltCore Spark 16 (JC16)</h1>
 </p>
 
-This (originally) was a fun little project I did in 2 weeks on vacation out of boredom, however it has now been expanded with many more hours invested into it. The JoltCore 16 (JC16v2) is an **evolution of my original 8-bit CPU**: it's **16-bit**, now, has **8 general purpose registers**, several I/O ports, up to **128 KiB RAM and 192 KiB ROM**, basic maths and logical instructions, a fairly mature assembler, basic yet performant emulator written in C++ and much more.
+This (originally) was a fun little project I did in 2 weeks on vacation out of boredom, however it has now been expanded with many more hours invested into it. The JoltCore 16 (JC16v2) is an **evolution of my original 8-bit CPU**: it's **16-bit** now, has **8 general purpose registers**, several I/O ports, up to **128 KiB RAM and 192 KiB ROM**, basic maths and logical instructions, a fairly mature assembler, basic yet performant emulator written in C++ and much more.
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > The entire CPU is a custom design - from bit shifter over wire layout to ISA.
 >
 > **In the winter of 2024 and 2025, it was improved further** by
@@ -56,7 +56,7 @@ A command to assemble into all possible output formats, using debug output and o
 ./jcasm ./asm/programs/fibonacci.asm -o ./asm/build/fibonacci.out -dO -f bBrx
 ```
 
-The emulator can be found in `emu`. It is written in C++. As of right now, only files exported from the assembler in the raw ROM format can be used. This is how it can be used:
+The emulator can be found in `emu`. It is written in C++. As of right now, only files exported from the assembler in the raw ROM format can be used. This is how it can be run:
 
 ```bash
 ./jcemu ./asm/build/fibonacci.out

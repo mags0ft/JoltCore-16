@@ -33,9 +33,9 @@ def generate_build_from_parsed(
             el.arguments[0].value -= 1
 
             if optimize:
-                # optimizations will remove some instructions due to them doing nothing.
-                # this needs to be accounted for in jump instructions, so they're
-                # adjusted accordingly.
+                # optimizations will remove some instructions due to them doing
+                # nothing. This needs to be accounted for in jump instructions,
+                # so they're adjusted accordingly.
 
                 el.arguments[0].value -= rom_addr_shift
 
@@ -61,14 +61,18 @@ an internal assembler error)"
     if debug_info:
         codegen_debug_info(
             f"""compilation succeeded!
-    {instr_used} instructions used ({(instr_used*INSTRUCTION_LENGTH)/1024:.3f} KiB)
-    {(instr_used/AVAILABLE_ROM)*100:.4f}% of {(AVAILABLE_ROM)/1024:.0f} KiB ROM occupied"""
+\t{instr_used} instructions used ({(instr_used*INSTRUCTION_LENGTH)/1024:.3f} \
+KiB)
+\t{(instr_used/AVAILABLE_ROM)*100:.4f}% of {(AVAILABLE_ROM)/1024:.0f} KiB ROM \
+occupied"""
         )
 
     for format_ in formats:
         if debug_info:
             codegen_debug_info(
-                f'formatting build as "{OUTPUT_EXTENSIONS[format_].upper()}"...'
+                'formatting build as "'
+                + OUTPUT_EXTENSIONS[format_].upper()
+                + '"...'
             )
         if format_ == "x":
             # hexadecimal output
@@ -102,14 +106,17 @@ an internal assembler error)"
 
 def blockify(generated):
     """
-    Formats different-length lines into uniform lengths to create a block of text.
+    Formats different-length lines into uniform lengths to create a block of
+    text.
     """
 
     finalized: str = ""
 
     for line in generated.splitlines():
         processed = line.replace(" ", "")
-        finalized += processed + ("0" * (INSTRUCTION_LENGTH - len(processed))) + "\n"
+        finalized += (
+            processed + ("0" * (INSTRUCTION_LENGTH - len(processed))) + "\n"
+        )
 
     return finalized.strip()
 
